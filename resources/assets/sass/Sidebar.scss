@@ -1,0 +1,13 @@
+$sidebar-item-padding: 20px;
+$sidebar-border-color: #d3e0e9;
+
+.Sidebar {
+  padding-right: 0;
+  border-right: 1px solid $sidebar-border-color;
+}
+
+.Sidebar__Item {
+  display: block;
+  padding: $sidebar-item-padding;
+  border-bottom: 1px solid $sidebar-border-color;
+}

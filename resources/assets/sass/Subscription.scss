@@ -1,0 +1,12 @@
+.Subscription {
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    visibility: hidden;
+  }
+}
+
+.Subscription--IsActive {
+  border-color: #0779F3;
+}

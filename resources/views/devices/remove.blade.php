@@ -6,4 +6,3 @@
     <button type="submit" class="btn btn-warning">Remove</button>
   </div>
 </form>
-

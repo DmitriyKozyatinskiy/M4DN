@@ -8,6 +8,7 @@
 require('./bootstrap');
 require('./header');
 require('./subscription');
+require('./devices');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

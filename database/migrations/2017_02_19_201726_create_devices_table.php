@@ -18,7 +18,7 @@ class CreateDevicesTable extends Migration
       $table->integer('user_id')->unsigned();
       $table->foreign('user_id')->references('id')->on('users');
       $table->string('name')->unique();
-      $table->string('userAgent');
+      $table->string('userAgent')->nullable();
       $table->timestamps();
     });
 

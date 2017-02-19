@@ -17,16 +17,17 @@
       @foreach ($devices as $device)
         <tr>
           <th>{{ $loop->iteration }}</th>
-          <th>{{ $loop->name }}</th>
-          <th>{{ $loop->userAgent }}</th>
+          <th>{{ $device->name }}</th>
+          <th>{{ $device->userAgent }}</th>
           <th>
-            <span class="glyphicon glyphicon-cog" role="button"></span>
+            <span class="glyphicon glyphicon-cog js-update-device" data-id="{{ $device->id }}" role="button"></span>
           </th>
           <th>
-            <span class="glyphicon glyphicon-remove text-danger" role="button"></span>
+            <span class="glyphicon glyphicon-remove text-danger js-remove-device" data-id="{{ $device->id }}" data-name="{{ $device->name }}" role="button"></span>
           </th>
         </tr>
       @endforeach
     </table>
+    <button type="button" class="btn btn-primary" id="js-add-device">Add new device</button>
   </div>
 @endsection

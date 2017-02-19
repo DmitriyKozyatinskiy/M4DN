@@ -30,6 +30,19 @@ Route::get('/account/subscription', 'Account\SubscriptionController@show')
 Route::post('/account/subscription', 'Account\SubscriptionController@setActive')
   ->middleware('login');
 
+Route::get('/devices/show', 'Devices\DevicesController@show')
+  ->middleware('login')
+  ->name('devices/show');
+Route::get('/devices/update/{id?}', 'Devices\DevicesController@update')
+  ->middleware('login');
+Route::post('/devices/update', 'Devices\DevicesController@save')
+  ->middleware('login');
+Route::post('/devices/delete', 'Devices\DevicesController@delete')
+  ->middleware('login');
+Route::get('/devices/delete', function () {
+  return view('devices/remove');
+})->middleware('login');
+
 Route::get('/admin/subscription/{id?}', 'Admin\SubscriptionController@show')
   ->middleware('admin');
 Route::post('/admin/subscription', 'Admin\SubscriptionController@save')

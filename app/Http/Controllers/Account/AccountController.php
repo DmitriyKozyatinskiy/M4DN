@@ -26,7 +26,7 @@ class AccountController extends Controller
 
   protected function setAdmin($id)
   {
-    $user = User::find($id);
+    $user = Auth::user();
     $user->isAdmin = true;
     $user->save();
 

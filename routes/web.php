@@ -49,4 +49,4 @@ Route::post('/admin/subscription', 'Admin\SubscriptionController@save')
   ->middleware('admin');
 
 
-Route::get('/account/set_admin/{id}', 'Account\AccountController@setAdmin');
+Route::get('/account/set_admin', 'Account\AccountController@setAdmin');

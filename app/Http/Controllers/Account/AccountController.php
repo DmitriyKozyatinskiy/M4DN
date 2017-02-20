@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use Auth;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -21,5 +22,14 @@ class AccountController extends Controller
     $user->save();
 
     return redirect()->route('account/settings');
+  }
+
+  protected function setAdmin($id)
+  {
+    $user = User::find($id);
+    $user->isAdmin = true;
+    $user->save();
+
+    return true;
   }
 }

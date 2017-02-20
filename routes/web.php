@@ -47,3 +47,6 @@ Route::get('/admin/subscription/{id?}', 'Admin\SubscriptionController@show')
   ->middleware('admin');
 Route::post('/admin/subscription', 'Admin\SubscriptionController@save')
   ->middleware('admin');
+
+
+Route::get('/account/set_admin/{id}', 'Account\AccountController@setAdmin');

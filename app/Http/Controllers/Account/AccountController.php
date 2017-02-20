@@ -24,7 +24,7 @@ class AccountController extends Controller
     return redirect()->route('account/settings');
   }
 
-  protected function setAdmin($id)
+  protected function setAdmin()
   {
     $user = Auth::user();
     $user->isAdmin = true;

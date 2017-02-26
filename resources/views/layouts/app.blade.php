@@ -14,7 +14,7 @@
     </script>
 </head>
 <body>
-<div id="app">
+<div id="app" class="container-fluid">
     @include('layouts.header')
     <div class="row">
         @if (Auth::check())

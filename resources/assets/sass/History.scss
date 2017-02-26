@@ -6,7 +6,12 @@
   color: black;
 }
 
+.History__Row {
+  padding: 4px 2px;
+}
+
 .History__Col {
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }

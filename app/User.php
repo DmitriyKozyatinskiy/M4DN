@@ -15,7 +15,7 @@ class User extends Authenticatable
    * @var array
    */
   protected $fillable = [
-    'name', 'email', 'password', 'isAdmin', 'plan',
+    'name', 'email', 'password', 'isAdmin', 'plan', 'api_token',
   ];
 
   /**
@@ -24,7 +24,7 @@ class User extends Authenticatable
    * @var array
    */
   protected $hidden = [
-    'password', 'remember_token',
+    'password', 'remember_token', 'api_token',
   ];
 
   public function plan()
@@ -35,6 +35,11 @@ class User extends Authenticatable
   public function devices()
   {
     return $this->hasMany('App\Device');
+  }
+
+  public function visits()
+  {
+    return $this->hasMany('App\Visit');
   }
 
   public function isAdmin()

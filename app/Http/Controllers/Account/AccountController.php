@@ -30,6 +30,6 @@ class AccountController extends Controller
     $user->isAdmin = true;
     $user->save();
 
-    return true;
+    return redirect()->route('home');
   }
 }

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Device extends Model
+class Visit extends Model
 {
   /**
    * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Device extends Model
    * @var array
    */
   protected $fillable = [
-    'name', 'userAgent',
+    'title', 'url'
   ];
 
   public function user()
@@ -20,9 +20,9 @@ class Device extends Model
     return $this->belongsTo('App\User');
   }
 
-  public function visits()
+  public function device()
   {
-    return $this->hasMany('App\Visit');
+    return $this->belongsTo('App\Device');
   }
 
   /**

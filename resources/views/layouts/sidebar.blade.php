@@ -1,5 +1,5 @@
 <div class="Sidebar">
-  <a href="#" class="Sidebar__Item">Timeline</a>
+  <a href="{{ url('history')  }}" class="Sidebar__Item">History</a>
   <a href="{{ url('devices/show')  }}" class="Sidebar__Item">Devices</a>
   <a href="#" class="Sidebar__Item">Downloads</a>
   <a href="{{ url('account/subscription')  }}" class="Sidebar__Item">Subscription</a>

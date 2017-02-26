@@ -13,9 +13,9 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('layouts/app');
-})->middleware('login');
+Route::get('/', 'Visits\VisitsController@show')
+  ->middleware('login')
+  ->name('home');
 
 Route::get('/account/settings', function () {
     return view('account/settings');
@@ -42,6 +42,9 @@ Route::post('/devices/delete', 'Devices\DevicesController@delete')
 Route::get('/devices/delete', function () {
   return view('devices/remove');
 })->middleware('login');
+Route::get('/history', 'Visits\VisitsController@show')
+  ->middleware('login')
+  ->name('visits/show');
 
 Route::get('/admin/subscription/{id?}', 'Admin\SubscriptionController@show')
   ->middleware('admin');
@@ -50,3 +53,8 @@ Route::post('/admin/subscription', 'Admin\SubscriptionController@save')
 
 
 Route::get('/account/set_admin', 'Account\AccountController@setAdmin');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+// Route::post('/api/v1/login', 'Auth\AuthenticateController@authenticate');

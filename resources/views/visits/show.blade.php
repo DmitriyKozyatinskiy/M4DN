@@ -7,7 +7,7 @@
     @foreach ($visitGroups as $key => $visits )
       <div class="History__Header">{{ $key }}</div>
         @foreach ($visits as $visit)
-          <div class="row History__Row">
+          <div class="clearfix History__Row">
             <div class="col-xs-1 History__Col">
                 <span title="{{ $visit->created_at }}">
                   {{ \Carbon\Carbon::parse($visit->created_at)->format('g:i a') }}

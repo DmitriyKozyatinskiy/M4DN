@@ -24,6 +24,7 @@ Route::group(['prefix' => 'v1'], function () {
 
   Route::get('/devices', 'Devices\DevicesAPIController@get');
   Route::post('/devices', 'Devices\DevicesAPIController@create');
+  Route::post('/logout', 'Devices\DevicesAPIController@test');
 
   Route::get('/visits', 'Visits\VisitsAPIController@get');
   Route::post('/visits', 'Visits\VisitsAPIController@create');

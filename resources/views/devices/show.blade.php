@@ -30,4 +30,8 @@
     </table>
     <button type="button" class="btn btn-primary" id="js-add-device">Add new device</button>
   </div>
+
+  @push('scripts')
+    <script src="/js/devices.js"></script>
+  @endpush
 @endsection

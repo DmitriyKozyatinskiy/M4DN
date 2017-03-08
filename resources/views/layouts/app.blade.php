@@ -34,6 +34,9 @@
     @include('layouts.modal')
 </div>
 
+
 <script src="/js/app.js"></script>
+@stack('scripts')
+
 </body>
 </html>

@@ -10,7 +10,7 @@ use Tymon\JWTAuth\Exceptions;
 
 class AuthenticateController extends Controller
 {
-    public function authenticate(Request $request)
+  public function authenticate(Request $request)
   {
     // grab credentials from the request
     $credentials = $request->only('email', 'password');

@@ -41,4 +41,8 @@
       </div>
     </form>
   </div>
+
+  @push('scripts')
+    <script src="/js/subscription.js"></script>
+  @endpush
 @endsection

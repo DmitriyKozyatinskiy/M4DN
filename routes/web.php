@@ -42,9 +42,11 @@ Route::post('/devices/delete', 'Devices\DevicesController@delete')
 Route::get('/devices/delete', function () {
   return view('devices/remove');
 })->middleware('login');
+
 Route::get('/history', 'Visits\VisitsController@show')
   ->middleware('login')
   ->name('visits/show');
+Route::get('/json/history', 'Visits\VisitsController@get');
 
 Route::get('/admin/subscription/{id?}', 'Admin\SubscriptionController@show')
   ->middleware('admin');

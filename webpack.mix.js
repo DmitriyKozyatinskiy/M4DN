@@ -1,10 +1,6 @@
 const { mix } = require('laravel-mix');
 
-mix.webpackConfig({
-  'presets': [
-    'es2015',
-  ]
-});
+mix.webpackConfig({});
 
 /*
  |--------------------------------------------------------------------------

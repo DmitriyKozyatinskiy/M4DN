@@ -5,8 +5,8 @@
     <h3 class="Title">History</h3>
     <form class="History__SearchForm form-inline" id="js-history-form">
       <div class="form-group">
-        <select class="form-control">
-          <option selected>Filter by</option>
+        <select class="form-control" id="js-history-device-selector">
+          <option value="" selected>All devices</option>
           @foreach ($devices as $device )
             <option value="{{ $device->id }}">{{ $device->name }}</option>
           @endforeach
@@ -14,10 +14,16 @@
       </div>
 
       <div class="input-group">
-        <input class="form-control input-groupdate date js-history-date" id="js-history-start-date" data-date-format="YYYY-MM-DD HH:mm:ss">
+        <input class="form-control input-groupdate date js-history-date"
+               id="js-history-start-date"
+               data-date-format="YYYY-MM-DD HH:mm:ss" placeholder="Start date">
         <div class="input-group-addon">to</div>
-        <input class="form-control input-groupdate date js-history-date" id="js-history-end-date" data-date-format="YYYY-MM-DD HH:mm:ss">
+        <input class="form-control input-groupdate date js-history-date"
+               id="js-history-end-date"
+               data-date-format="YYYY-MM-DD HH:mm:ss" placeholder="End date">
       </div>
+
+      <input class="form-control" id="js-history-keyword" placeholder="Keyword">
 
       {{--<div class="input-group">--}}
       {{--<div class="input-groupdate" id="js-history-start-date">--}}
@@ -33,8 +39,8 @@
       {{--</span>--}}
       {{--</div>--}}
       {{--</div>--}}
-      <button type="submit" class="btn btn-primary">Search</button>
-      <button type="reset" class="btn btn-default">Reset</button>
+      <button type="submit" class="btn btn-primary" id="js-history-submit-button">Search</button>
+      <button type="reset" class="btn btn-default" id="js-history-reset-button">Reset</button>
     </form>
 
     <div id="js-history"></div>

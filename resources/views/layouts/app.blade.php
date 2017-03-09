@@ -14,9 +14,9 @@
     </script>
 </head>
 <body>
-<div id="app" class="container-fluid">
+<div id="app" class="container-fluid Wrapper">
     @include('layouts.header')
-    <div class="row">
+    <div class="row Wrapper__Row">
         @if (Auth::check())
             <div class="col-xs-2">
                 @include('layouts.sidebar')

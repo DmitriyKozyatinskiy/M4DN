@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use JWTAuth;
 use Exception;
 use Tymon\JWTAuth\Exceptions;
+use App\User;
 
 class AuthenticateController extends Controller
 {
@@ -79,6 +80,43 @@ class AuthenticateController extends Controller
       ], 500);
     }
     // the token is valid and we have found the user via the sub claim
+    return response()->json([
+      'status' => 200,
+      'statusText' => 'OK',
+      'data' => compact('user'),
+      'isSuccess' => true
+    ], 200);
+  }
+
+
+  public function registration(Request $request)
+  {
+    // grab credentials from the request
+    $credentials = $request->only('name', 'email', 'password', 'passwordConfirm');
+
+    if ($credentials['password'] !== $credentials['passwordConfirm']) {
+      return response()->json([
+        'status' => 401,
+        'statusText' => 'Passwords don`t match',
+        'isSuccess' => false
+      ], 401);
+    }
+
+    try {
+      $user = User::create([
+        'name' => $credentials['name'],
+        'email' => $credentials['email'],
+        'password' => bcrypt($credentials['password']),
+        'api_token' => str_random(60)
+      ]);
+    } catch (Exception $e) {
+      return response()->json([
+        'status' => $e->getMessage(),
+        'statusText' => 'Unknown error',
+        'isSuccess' => false
+      ], 500);
+    }
+
     return response()->json([
       'status' => 200,
       'statusText' => 'OK',

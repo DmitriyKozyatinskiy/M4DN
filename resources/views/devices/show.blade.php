@@ -4,6 +4,12 @@
   <div class="container-fluid">
     <h3 class="Title">Devices</h3>
 
+    @if (session('device-save-success'))
+      <div class="alert alert-success">
+        {{ session('device-save-success') }}
+      </div>
+    @endif
+
     <table class="table table-striped">
       <thead>
         <tr>

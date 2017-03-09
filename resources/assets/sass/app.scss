@@ -15,6 +15,14 @@ $title-margin-bottom: 15px;
 @import "Subscription";
 @import "History";
 
+.Wrapper {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.Wrapper__Row {
+  width: 100%;
+}
 
 .Content {
   margin-top: 10px;

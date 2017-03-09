@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Auth;
 use App\Plan;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
@@ -22,15 +21,25 @@ class SubscriptionController extends Controller
     return view('admin/subscription', ['plan' => $plan]);
   }
 
-  protected function save(Request $data)
+  protected function save(Request $request)
   {
-    $plan = $data->id ? Plan::find($data->id) : new Plan();
-    $plan->name = $data->name;
-    $plan->devices = $data->devices;
-    $plan->days = $data->days;
-    $plan->price = $data->price;
+    $this->validate($request, [
+      'name' => 'required|max:30',
+      'hours' => 'required|numeric',
+      'price' => 'required|numeric',
+      'description' => 'required|max:255'
+    ]);
+
+    $plan = $request->id ? Plan::find($request->id) : new Plan();
+    $plan->name = $request->name;
+    $plan->devices = 10; //$data->devices;
+    $plan->hours = $request->hours;
+    $plan->price = $request->price ? $request->price : 0;
+    $plan->description = $request->description;
     $plan->save();
 
-    return redirect()->route('subscription/show');
+    //return $this->show($plan->id);
+
+    return redirect()->route('subscription/show')->with('subscription-save-success', 'Subscription is saved!');
   }
 }

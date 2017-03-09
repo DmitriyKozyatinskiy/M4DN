@@ -27,16 +27,20 @@ class DevicesController extends Controller
     return view('devices/update', ['device' => $device]);
   }
 
-  protected function save(Request $data)
+  protected function save(Request $request)
   {
-    $device = $data->id ? Device::find($data->id) : new Device();
-    $device->name = $data->name;
-    $device->userAgent = $data->useCurrentUserAgent ? $data->header('User-Agent') : $data->userAgent;
+    $this->validate($request, [
+      'name' => 'required|max:30'
+    ]);
+
+    $device = $request->id ? Device::find($request->id) : new Device();
+    $device->name = $request->name;
+    $device->userAgent = $request->useCurrentUserAgent ? $request->header('User-Agent') : $request->userAgent;
     $user = Auth::user();
     $device->user()->associate($user);
     $device->save();
 
-    return redirect()->route('devices/show');
+    return redirect()->route('devices/show')->with('device-save-success', 'Device is saved!');
   }
 
   protected function delete(Request $data)

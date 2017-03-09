@@ -12,7 +12,7 @@ class Plan extends Model
    * @var array
    */
   protected $fillable = [
-    'name', 'level', 'description', 'devices', 'days', 'price', 'saveIncognito', 'saveAllHistory',
+    'name', 'level', 'description', 'devices', 'hours', 'price', 'saveIncognito', 'saveAllHistory',
   ];
 
   public function users()

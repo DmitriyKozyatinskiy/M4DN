@@ -3,25 +3,15 @@
 require('eonasdan-bootstrap-datetimepicker');
 require('../../../../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css');
 
-// require('bootstrap-datepicker');
-// require('../../../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css');
-
 import template from './History.html';
 import checkRequestStatus from './../helpers';
 
 const OFFSET_SIZE = 20;
 
 let offset = 0;
-let isLoading = false;
-const loadedHistory = [];
+let loadedHistory = [];
 
 function getHistory(settings) {
-  settings = {
-    // device_id: 3
-    // start_date: '2017-03-05 02:58:55',
-    // end_date: '2017-03-05 02:59:55'
-  };
-
   return new Promise((resolve, reject) => {
     const searchQuery = settings ? $.param(settings) : '';
     fetch(`/json/history?offset=${ offset }&` + searchQuery, {
@@ -79,18 +69,44 @@ function renderHistory() {
 
 function detectScroll(event) {
   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-    loadNewHistoryData();
+    const settings = {
+      device_id: $('#js-history-device-selector').val(),
+      start_date: $('#js-history-start-date').val(),
+      end_date: $('#js-history-end-date').val()
+    };
+    loadNewHistoryData(settings);
   }
 }
 
-function loadNewHistoryData() {
-  getHistory().then(response => {
-    if (response.isSuccess) {
-      let data = convertData(response.data);
-      concatLoadedHistory(data);
-      renderHistory();
-    }
+function loadNewHistoryData(settings) {
+  return new Promise((resolve, reject) => {
+    getHistory(settings).then(response => {
+      if (response.isSuccess) {
+        let data = convertData(response.data);
+        concatLoadedHistory(data);
+        renderHistory();
+      }
+    });
   });
+}
+
+function handleSearch(event) {
+  event.preventDefault();
+  const settings = {
+    device_id: $('#js-history-device-selector').val(),
+    start_date: $('#js-history-start-date').val(),
+    end_date: $('#js-history-end-date').val(),
+    keyword: $('#js-history-keyword').val()
+  };
+  offset = 0;
+  loadedHistory = [];
+  loadNewHistoryData(settings);
+}
+
+function handleReset() {
+  offset = 0;
+  loadedHistory = [];
+  loadNewHistoryData();
 }
 
 $(() => {
@@ -107,10 +123,9 @@ $(() => {
     $startDate.data('DateTimePicker').maxDate(e.date);
   });
 
-  $(document).on('submit', '#js-history-form', event => {
-    event.preventDefault();
-    loadNewHistoryData();
-  });
+  $(document)
+    .on('submit', '#js-history-form', handleSearch)
+    .on('reset', '#js-history-form', handleReset);
 
   $(window).on('scroll', _.throttle(detectScroll, 100));
 

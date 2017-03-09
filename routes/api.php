@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('/v1/auth/login', 'Auth\AuthenticateController@authenticate');
+Route::post('/v1/auth/registration', 'Auth\AuthenticateController@registration');
+
 Route::group(['prefix' => 'v1'], function () {
   Route::post('/auth/check', 'Auth\AuthenticateController@getAuthenticatedUser');
 

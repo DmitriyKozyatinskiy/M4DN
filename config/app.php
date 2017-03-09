@@ -12,7 +12,7 @@ return [
   | any other location as required by the application or its packages.
   */
 
-  'name' => 'M4DH',
+  'name' => 'Sneekr',
 
   /*
   |--------------------------------------------------------------------------
@@ -179,6 +179,7 @@ return [
 
     Barryvdh\Cors\ServiceProvider::class,
     Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+    Bestmomo\LaravelEmailConfirmation\ServiceProvider::class,
   ],
 
   /*

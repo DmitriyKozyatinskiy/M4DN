@@ -1,6 +1,4 @@
-$(document)
-  .on('click', '.js-update-device, #js-add-device', openDeviceForm)
-  .on('click', '.js-remove-device', removeDevice);
+$ = window.$;
 
 function openDeviceForm(event) {
   const id = $(event.target).data('id') || null;
@@ -23,3 +21,7 @@ function removeDevice(event) {
     $('#js-modal').modal('show');
   });
 }
+
+$(document)
+  .on('click', '.js-update-device, #js-add-device', openDeviceForm)
+  .on('click', '.js-remove-device', removeDevice);

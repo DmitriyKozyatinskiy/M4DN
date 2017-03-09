@@ -14,14 +14,19 @@ class AccountController extends Controller
   {
   }
 
-  protected function save(Request $data)
+  protected function save(Request $request)
   {
+    $this->validate($request, [
+      'name' => 'required|max:25|string',
+      'password' => 'required|min:6|confirmed',
+    ]);
+
     $user = Auth::user();
-    $user->name = $data->name;
-    $user->email = $data->email;
+    $user->name = $request->name;
+    $user->password = $request->password;
     $user->save();
 
-    return redirect()->route('account/settings');
+    return redirect()->route('account/settings')->with('settings-change-success', 'Profile updated!');
   }
 
   protected function setAdmin()

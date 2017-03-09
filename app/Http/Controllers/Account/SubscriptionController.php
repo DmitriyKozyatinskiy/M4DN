@@ -14,9 +14,9 @@ class SubscriptionController extends Controller
   {
   }
 
-  protected function setActive(Request $data)
+  protected function setActive(Request $request)
   {
-    $plan = Plan::find($data->subscriptionID);
+    $plan = Plan::find($request->subscription_id);
     $user = Auth::user();
     $user->plan()->associate($plan);
     $user->save();

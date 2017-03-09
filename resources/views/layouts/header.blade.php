@@ -2,7 +2,7 @@
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="{{ url('/') }}">
-        {{ config('app.name', 'M4DH') }}
+        {{ config('app.name', 'Sneekr') }}
       </a>
     </div>
 

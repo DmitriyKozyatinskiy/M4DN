@@ -1,6 +1,4 @@
-$(document)
-  .on('click', '.js-subscription', setActiveSubscription)
-  .on('click', '.js-subscription-settings, #js-add-plan', openSettings);
+$ = window.$;
 
 function setActiveSubscription(event) {
   $('.js-subscription').removeClass('Subscription--IsActive');
@@ -16,3 +14,7 @@ function openSettings(event) {
     $('#js-modal').modal('show');
   })
 }
+
+$(document)
+  .on('click', '.js-subscription', setActiveSubscription)
+  .on('click', '.js-subscription-settings, #js-add-plan', openSettings);

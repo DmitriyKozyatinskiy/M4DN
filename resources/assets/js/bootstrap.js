@@ -12,6 +12,8 @@ window.moment = require('moment');
 
 require('whatwg-fetch');
 require('bootstrap-sass');
+// require('eonasdan-bootstrap-datetimepicker');
+// require('../../../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces

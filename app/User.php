@@ -15,7 +15,7 @@ class User extends Authenticatable
    * @var array
    */
   protected $fillable = [
-    'name', 'email', 'password', 'isAdmin', 'plan', 'api_token',
+    'name', 'email', 'password', 'isAdmin', 'plan', 'api_token', 'is_first_login'
   ];
 
   /**
@@ -24,7 +24,7 @@ class User extends Authenticatable
    * @var array
    */
   protected $hidden = [
-    'password', 'remember_token', 'api_token',
+    'password', 'remember_token', 'api_token', 'confirmation_code', 'confirmed',
   ];
 
   public function plan()

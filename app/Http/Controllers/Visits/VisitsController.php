@@ -40,8 +40,12 @@ class VisitsController extends Controller
     $endDate = $request->end_date;
     $keyword = $request->keyword;
 
+    $hoursLimit = $user->plan->hours;
+    $limitDate = Carbon::now()->subHours($hoursLimit);
+
     $visits =
       Visit::where('user_id', $user->id)
+        ->where('created_at', '>', $limitDate)
         ->when($device, function ($query) use ($device) {
           return $query->where('device_id', $device);
         })

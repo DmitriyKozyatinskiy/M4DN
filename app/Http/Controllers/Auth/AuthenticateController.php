@@ -8,9 +8,15 @@ use JWTAuth;
 use Exception;
 use Tymon\JWTAuth\Exceptions;
 use App\User;
+use Illuminate\Auth\Events\Registered;
+use Bestmomo\LaravelEmailConfirmation\Traits\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
+use App\Plan;
 
 class AuthenticateController extends Controller
 {
+  use RegistersUsers;
+
   public function authenticate(Request $request)
   {
     // grab credentials from the request
@@ -91,35 +97,66 @@ class AuthenticateController extends Controller
 
   public function registration(Request $request)
   {
-    // grab credentials from the request
-    $credentials = $request->only('name', 'email', 'password', 'passwordConfirm');
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|max:25|string',
+      'email' => 'required|email|max:255|unique:users',
+      'password' => 'required|min:6|confirmed'
+    ]);
 
-    if ($credentials['password'] !== $credentials['passwordConfirm']) {
+    if ($validator->fails()) {
       return response()->json([
-        'status' => 401,
-        'statusText' => 'Passwords don`t match',
-        'isSuccess' => false
-      ], 401);
-    }
-
-    try {
-      $user = User::create([
-        'name' => $credentials['name'],
-        'email' => $credentials['email'],
-        'password' => bcrypt($credentials['password']),
-        'api_token' => str_random(60)
-      ]);
-    } catch (Exception $e) {
-      return response()->json([
-        'status' => $e->getMessage(),
+        'status' => '401',
         'statusText' => 'Unknown error',
-        'isSuccess' => false
+        'isSuccess' => false,
+        'errors' => $validator->messages()
       ], 500);
     }
 
+    $user = User::create([
+      'name' => $request['name'],
+      'email' => $request['email'],
+      'password' => bcrypt($request['password']),
+      'api_token' => str_random(60)
+    ]);
+
+    $freePlan = Plan::where('price', 0)->first();
+    if ($freePlan) {
+      $user->plan()->associate($freePlan);
+    }
+
+    $user->confirmation_code = str_random(30);
+    $user->save();
+    event(new Registered($user));
+    $this->notifyUser($user);
+
+//    $credentials = $request->only('name', 'email', 'password', 'passwordConfirm');
+//
+//    if ($credentials['password'] !== $credentials['password_confirmation']) {
+//      return response()->json([
+//        'status' => 401,
+//        'statusText' => 'Passwords don`t match',
+//        'isSuccess' => false
+//      ], 401);
+//    }
+//
+//    try {
+//      $user = User::create([
+//        'name' => $credentials['name'],
+//        'email' => $credentials['email'],
+//        'password' => bcrypt($credentials['password']),
+//        'api_token' => str_random(60)
+//      ]);
+//    } catch (Exception $e) {
+//      return response()->json([
+//        'status' => $e->getMessage(),
+//        'statusText' => 'Unknown error',
+//        'isSuccess' => false
+//      ], 500);
+//    }
+
     return response()->json([
       'status' => 200,
-      'statusText' => 'OK',
+      'statusText' => 'Confirmation email was send',
       'data' => compact('user'),
       'isSuccess' => true
     ], 200);

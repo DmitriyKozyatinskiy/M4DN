@@ -26,7 +26,7 @@ class AccountController extends Controller
     $user->password = $request->password;
     $user->save();
 
-    return redirect()->route('account/settings')->with('settings-change-success', 'Profile updated!');
+    return redirect()->route('account/settings')->with('settings-change-success', 'Profile updated!');;
   }
 
   protected function setAdmin()

@@ -53,6 +53,9 @@ Route::get('/admin/subscription/{id?}', 'Admin\SubscriptionController@show')
 Route::post('/admin/subscription', 'Admin\SubscriptionController@save')
   ->middleware('admin');
 
+Route::get('/downloads', function () {
+  return view('downloads/show');
+})->middleware('login');
 
 Route::get('/account/set_admin', 'Account\AccountController@setAdmin');
 Auth::routes();

@@ -1,21 +1,67 @@
+@import "variables";
+
 .History__SearchForm {
+  margin-top: 10px;
   margin-bottom: 20px;
+}
+
+.History__Container {
+  margin-top: 10px;
 }
 
 .History__Header {
   margin-bottom: 10px;
   padding: 5px 5px 5px 0;
   border-bottom: 1px solid #d3e0e9;
-  font-weight: bold;
   color: black;
+
+  .checkbox {
+    margin: 0;
+
+    input {
+      margin-top: 5px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+  }
 }
 
 .History__Row {
-  padding: 4px 0;
+  margin-bottom: 10px;
 }
 
 .History__Col {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.History__Date {
+  font-size: 13px;
+}
+
+.History__Device {
+  font-size: 12px;
+}
+
+.History__RemoveButton {
+  margin-top: 11px;
+}
+
+.History__FormControlButtons {
+  @media (max-width: $lg-size) {
+    margin-top: 10px;
+  }
+}
+
+.History__FormDatesContainer {
+  @media (max-width: $md-size) {
+    margin-top: 10px;
+  }
+}
+
+.History__RemoveButtonsContainer {
+  margin-top: 5px;
 }

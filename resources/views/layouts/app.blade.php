@@ -18,10 +18,10 @@
     @include('layouts.header')
     <div class="row Wrapper__Row">
         @if (Auth::check())
-            <div class="col-xs-2">
+            <div class="col-sm-3 col-md-2">
                 @include('layouts.sidebar')
             </div>
-            <div class="col-xs-10 Content">
+            <div class="col-xs-12 col-sm-9 col-md-10 Content">
                 @yield('content')
             </div>
         @else

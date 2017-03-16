@@ -1,7 +1,7 @@
 // const API_URL = 'http://127.0.0.1:8000/api/v1'; // http://infinite-journey-46117.herokuapp.com/api/v1';
+$ = window.$;
 
-require('eonasdan-bootstrap-datetimepicker');
-require('../../../../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css');
+import enquire from 'enquire.js';
 
 import template from './History.html';
 import checkRequestStatus from './../helpers';
@@ -10,6 +10,7 @@ const OFFSET_SIZE = 20;
 
 let offset = 0;
 let loadedHistory = [];
+let selectedHistory = [];
 
 function getHistory(settings) {
   return new Promise((resolve, reject) => {
@@ -60,15 +61,23 @@ function concatLoadedHistory(data) {
 }
 
 function renderHistory() {
-  console.log(loadedHistory);
   const $template = $(Mustache.render(template, {
     visitGroups: loadedHistory
   }));
   $('#js-history').html($template);
+  selectedHistory.forEach(item => {
+    $(`.js-history-remove-checkbox[value=${ item }]`).prop('checked', true);
+  });
 }
 
 function detectScroll(event) {
   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    selectedHistory = [];
+    $('.js-history-remove-checkbox:checked').each(function() {
+      const id = $(this).val();
+      selectedHistory.push(id);
+    });
+
     const settings = {
       device_id: $('#js-history-device-selector').val(),
       start_date: $('#js-history-start-date').val(),
@@ -100,13 +109,56 @@ function handleSearch(event) {
   };
   offset = 0;
   loadedHistory = [];
+  selectedHistory = [];
   loadNewHistoryData(settings);
 }
 
 function handleReset() {
   offset = 0;
   loadedHistory = [];
+  selectedHistory = [];
+  $('.js-history-group-checkbox').prop('checked', false);
+  $('.js-history-remove-checkbox').prop('checked', false);
   loadNewHistoryData();
+}
+
+function removeHistory(data) {
+  return new Promise((resolve, reject) => {
+    fetch(`/json/history`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data
+      })
+    })
+      .then(checkRequestStatus)
+      .then(resolve)
+      .catch(error => {
+        reject(error.response);
+      });
+  });
+}
+
+function selectGroup(event) {
+  const $groupCheckbox = $(event.target);
+  const $checkboxes = $groupCheckbox.closest('.js-history-group').find('.js-history-remove-checkbox');
+  const isChecked = $groupCheckbox.is(':checked');
+  $checkboxes.prop('checked', isChecked);
+  // $checkboxes.each(function() {
+  //   const $checkbox = $(this);
+  //   $checkbox.prop('checked', isChecked);
+  // });
+}
+
+function selectHistoryCheckbox(event) {
+  const $checkbox = $(event.target);
+  const $group = $checkbox.closest('.js-history-group');
+  const $checkboxes = $group.find('.js-history-remove-checkbox');
+  const $selectedCheckboxes = $checkboxes.filter(':checked');
+  $group.find('.js-history-group-checkbox').prop('checked', $checkboxes.length === $selectedCheckboxes.length);
 }
 
 $(() => {
@@ -119,13 +171,46 @@ $(() => {
   $startDate.on('dp.change', function (e) {
     $endDate.data('DateTimePicker').minDate(e.date);
   });
-  $endDate.on("dp.change", function (e) {
+  $endDate.on('dp.change', function (e) {
     $startDate.data('DateTimePicker').maxDate(e.date);
   });
 
   $(document)
     .on('submit', '#js-history-form', handleSearch)
-    .on('reset', '#js-history-form', handleReset);
+    .on('reset', '#js-history-form', handleReset)
+    .on('click', '.js-history-group-checkbox', selectGroup)
+    .on('change', '.js-history-remove-checkbox', selectHistoryCheckbox)
+    .on('click', '#js-history-remove-all-button', function () {
+      $('#js-history-confirmation-modal').modal('show');
+    })
+    .on('click', '#js-history-all-remove-proceed', () => removeHistory({
+      type: 'all'
+    }).then(response => {
+      if (response.isSuccess) {
+        $('#js-history-confirmation-modal').modal('hide');
+        $('#js-history').empty();
+      }
+    }))
+    .on('click', '#js-history-remove-selected-button', function (event) {
+      event.preventDefault();
+      const ids = [];
+      const $checkedRows = $('.js-history-remove-checkbox:checked');
+      $checkedRows.each(function() {
+        const id = $(this).val();
+        ids.push(id);
+      });
+      removeHistory({
+        ids: ids,
+        type: 'partial'
+      }).then(response => {
+        if (response.isSuccess) {
+          $checkedRows.closest('.js-history-row').remove();
+          $('.js-history-group').filter(function() {
+            return !$(this).find('.js-history-row').length;
+          }).remove();
+        }
+      });
+    });
 
   $(window).on('scroll', _.throttle(detectScroll, 100));
 
@@ -137,4 +222,10 @@ $(() => {
   });
 
   loadNewHistoryData();
+
+
+    enquire.register('(max-width:992px)', function() {
+       $('#js-history-form-container').removeClass('in');
+       $('#js-history-form-toggler').removeClass('hidden');
+    });
 });

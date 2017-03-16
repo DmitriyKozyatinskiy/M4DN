@@ -24,6 +24,34 @@ class VisitsController extends Controller
     return view('visits/show', ['devices' => $devices]);
   }
 
+  public function delete(Request $request)
+  {
+    $user = Auth::user();
+    if (!$user) {
+      return response()->json([
+        'status' => 401,
+        'statusText' => 'Unauthorized',
+        'isSuccess' => false
+      ], 401);
+    }
+
+    if ($request->data['type'] === 'all') {
+      Visit::where('user_id', $user->id)->delete();
+    } else {
+      foreach ($request->data['ids'] as $id) {
+        if ($id && $id == $user->id) {
+          Visit::destroy($id);
+        }
+      }
+    }
+
+    return response()->json([
+      'status' => 200,
+      'statusText' => 'OK',
+      'isSuccess' => true
+    ], 200);
+  }
+
   public function get(Request $request)
   {
     $user = Auth::user();

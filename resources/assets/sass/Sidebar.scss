@@ -1,9 +1,15 @@
+@import "variables";
+
 $sidebar-item-padding: 20px;
 $sidebar-border-color: #d3e0e9;
 
 .Sidebar {
   padding-right: 0;
   border-right: 1px solid $sidebar-border-color;
+
+  @media (max-width: $sm-size) {
+    display: none;
+  }
 }
 
 .Sidebar__Item {

@@ -1,0 +1,31 @@
+@import "variables";
+
+.Tray {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  left: 0;
+  border-top: 1px solid #d3e0e9;
+  background-color: white;
+
+  //@media (max-width: $sm-size) {
+  //  display: block !important;
+  //}
+}
+
+.Tray__Item {
+  display: block;
+  padding: 10px 25px;
+  border-bottom: 1px solid #d3e0e9;
+  border-left: 1px solid #d3e0e9;
+}
+
+.Tray__Trigger {
+  display: none !important;
+  height: 100%;
+
+  @media (max-width: $sm-size) {
+    display: block !important;
+  }
+}

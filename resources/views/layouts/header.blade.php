@@ -1,6 +1,17 @@
 <nav class="Header navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
+      <a class="navbar-brand" href="#" id="js-tray-trigger">
+        <img alt="Sneekr" title="Sneekr" src="{{ asset('images/tray.png')}}" class="Tray__Trigger js-tray-trigger">
+      </a>
+      <div class="Tray js-tray" id="js-tray">
+        <a href="{{ url('history') }}" class="Tray__Item">History</a>
+        <a href="{{ url('devices/show') }}" class="Tray__Item">Devices</a>
+        <a href="{{ url('downloads') }}" class="Tray__Item">Downloads</a>
+        <a href="{{ url('account/subscription') }}" class="Tray__Item">Subscription</a>
+        <a href="{{ url('account/settings') }}" class="Tray__Item">Account Settings</a>
+        <a href="{{ url('account/logout') }}" class="Tray__Item">Logout</a>
+      </div>
       <a class="navbar-brand" href="{{ url('/') }}">
         {{ config('app.name', 'Sneekr') }}
       </a>

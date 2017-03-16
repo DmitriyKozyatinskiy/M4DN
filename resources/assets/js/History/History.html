@@ -1,27 +1,40 @@
-<div>
-    {{ #visitGroups }}
-    <div class="clearfix">
-        <div class="History__Header">{{ groupName }}</div>
-
-        {{ #visits }}
-        <div class="clearfix History__Row">
-            <div class="col-xs-1 History__Col">
-            <span title="{{ created_at }}">
-              {{ shortDate }}
-            </span>
-            </div>
-            <div class="col-xs-1 History__Col">
-                <span title="{{ device.userAgent }}">{{ device.name }}</span>
-            </div>
-            <div class="col-xs-5 History__Col">
-                <a href="{{ url }}" title="{{ url }}">{{ url }}</a>
-            </div>
-            <div class="col-xs-5 History__Col">
-                <span title="{{ title }}">{{ title }}</span>
-            </div>
-        </div>
-        <br>
-        {{ /visits }}
+<div class="js-history-group">
+  {{ #visitGroups }}
+  <div class="clearfix">
+    <div class="History__Header">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" class="js-history-group-checkbox">
+          <span>{{ groupName }}</span>
+        </label>
+      </div>
+      <!--<input type="checkbox" value="{{ id }}" class="js-history-remove-checkbox">-->
+      <!--<span>{{ groupName }}</span>-->
     </div>
-    {{/visitGroups}}
+
+    {{ #visits }}
+    <div class="clearfix History__Row js-history-row">
+      <div class="History__RemoveButton col-xs-1 text-center">
+        <!--<a href="#" class="text-muted js-remove-button" data-id="{{ id }}">-->
+        <!--<span class="glyphicon glyphicon-remove" role="button"></span>-->
+        <!--</a>-->
+        <input type="checkbox" value="{{ id }}" class="js-history-remove-checkbox">
+      </div>
+      <div class="col-xs-3 col-md-2 col-lg-1 History__Col">
+        <span class="History__Date" title="{{ created_at }}">{{ shortDate }}</span>
+        <br>
+        <span class="History__Device" title="{{ device.userAgent }}">{{ device.name }}</span>
+      </div>
+      <div class="col-xs-8 col-md-9 col-lg-10 History__Col">
+        <a href="{{ url }}" title="{{ url }}">{{ url }}</a>
+        <br>
+        <span title="{{ title }}">{{ title }}</span>
+      </div>
+      <!--<div class="col-xs-5 History__Col">-->
+      <!--<span title="{{ title }}">{{ title }}</span>-->
+      <!--</div>-->
+    </div>
+    {{ /visits }}
+  </div>
+  {{/visitGroups}}
 </div>

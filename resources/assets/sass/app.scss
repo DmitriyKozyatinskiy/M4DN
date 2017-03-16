@@ -10,10 +10,15 @@ $title-margin-bottom: 15px;
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import "Header";
+@import "Tray";
 @import "Sidebar";
 @import "Auth";
 @import "Subscription";
 @import "History";
+
+html, body {
+  height: 100%;
+}
 
 .Wrapper {
   padding-right: 0;

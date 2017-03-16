@@ -3,47 +3,46 @@
 @section('content')
   <div class="container-fluid">
     <h3 class="Title">History</h3>
-    <form class="History__SearchForm form-inline" id="js-history-form">
-      <div class="form-group">
-        <select class="form-control" id="js-history-device-selector">
-          <option value="" selected>All devices</option>
-          @foreach ($devices as $device )
-            <option value="{{ $device->id }}">{{ $device->name }}</option>
-          @endforeach
-        </select>
-      </div>
 
-      <div class="input-group">
-        <input class="form-control input-groupdate date js-history-date"
-               id="js-history-start-date"
-               data-date-format="YYYY-MM-DD HH:mm:ss" placeholder="Start date">
-        <div class="input-group-addon">to</div>
-        <input class="form-control input-groupdate date js-history-date"
-               id="js-history-end-date"
-               data-date-format="YYYY-MM-DD HH:mm:ss" placeholder="End date">
-      </div>
+    <a class="btn btn-primary hidden" id="js-history-form-toggler" role="button"
+       data-toggle="collapse" href="#js-history-form-container" aria-expanded="false" aria-controls="js-history-form-container">
+      Filters
+    </a>
+    <div class="collapse in" id="js-history-form-container">
+      <form class="History__SearchForm form-inline well" id="js-history-form">
+        <div class="form-group">
+          <select class="form-control" id="js-history-device-selector">
+            <option value="" selected>All devices</option>
+            @foreach ($devices as $device )
+              <option value="{{ $device->id }}">{{ $device->name }}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="form-group">
+          <input class="form-control" id="js-history-keyword" placeholder="Keyword">
+        </div>
+        <div class="input-group History__FormDatesContainer">
+          <input class="form-control input-groupdate date js-history-date"
+                 id="js-history-start-date"
+                 data-date-format="YYYY-MM-DD HH:mm:ss" placeholder="Start date">
+          <div class="input-group-addon">to</div>
+          <input class="form-control input-groupdate date js-history-date"
+                 id="js-history-end-date"
+                 data-date-format="YYYY-MM-DD HH:mm:ss" placeholder="End date">
+        </div>
+        <div class="form-group History__FormControlButtons">
+          <button type="submit" class="btn btn-primary" id="js-history-submit-button">Search</button>
+          <button type="reset" class="btn btn-default" id="js-history-reset-button">Reset</button>
+        </div>
+      </form>
+    </div>
+    <div class="form-group History__RemoveButtonsContainer">
+      <button type="button" class="btn btn-default" id="js-history-remove-selected-button">Remove selected</button>
+      <button type="button" class="btn btn-warning" id="js-history-remove-all-button">Remove all</button>
+    </div>
 
-      <input class="form-control" id="js-history-keyword" placeholder="Keyword">
 
-      {{--<div class="input-group">--}}
-      {{--<div class="input-groupdate" id="js-history-start-date">--}}
-      {{--<input class="form-control">--}}
-      {{--<span class="input-group-addon">--}}
-      {{--<span class="glyphicon glyphicon-calendar"></span>--}}
-      {{--</span>--}}
-      {{--</div>--}}
-      {{--<div class="input-group date" id="js-history-end-date">--}}
-      {{--<input class="form-control">--}}
-      {{--<span class="input-group-addon">--}}
-      {{--<span class="glyphicon glyphicon-calendar"></span>--}}
-      {{--</span>--}}
-      {{--</div>--}}
-      {{--</div>--}}
-      <button type="submit" class="btn btn-primary" id="js-history-submit-button">Search</button>
-      <button type="reset" class="btn btn-default" id="js-history-reset-button">Reset</button>
-    </form>
-
-    <div id="js-history"></div>
+    <div class="History__Container" id="js-history"></div>
     {{--<nav aria-label="Page navigation">--}}
       {{--<ul class="pagination">--}}
         {{--<li>--}}
@@ -86,6 +85,23 @@
     {{--@endforeach--}}
     {{--<br>--}}
     {{--@endforeach--}}
+  </div>
+
+  <div class="modal fade" id="js-history-confirmation-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Are you sure to clear history?</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-warning" id="js-history-all-remove-proceed">Proceed</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   @push('scripts')

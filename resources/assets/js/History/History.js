@@ -11,6 +11,7 @@ const OFFSET_SIZE = 20;
 let offset = 0;
 let loadedHistory = [];
 let selectedHistory = [];
+let isLoading = false;
 
 function getHistory(settings) {
   return new Promise((resolve, reject) => {
@@ -60,6 +61,14 @@ function concatLoadedHistory(data) {
   });
 }
 
+function removeItemsFromLoadedHistory(ids) {
+  loadedHistory.forEach(loadedGroup => {
+    _.remove(loadedGroup.visits, visit => {
+      return ids.indexOf(String(visit.id)) !== -1;
+    });
+  });
+}
+
 function renderHistory() {
   const $template = $(Mustache.render(template, {
     visitGroups: loadedHistory
@@ -71,7 +80,7 @@ function renderHistory() {
 }
 
 function detectScroll(event) {
-  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !isLoading) {
     selectedHistory = [];
     $('.js-history-remove-checkbox:checked').each(function() {
       const id = $(this).val();
@@ -124,6 +133,7 @@ function handleReset() {
 
 function removeHistory(data) {
   return new Promise((resolve, reject) => {
+    isLoading = true;
     fetch(`/json/history`, {
       method: 'DELETE',
       credentials: 'include',
@@ -135,8 +145,12 @@ function removeHistory(data) {
       })
     })
       .then(checkRequestStatus)
-      .then(resolve)
+      .then(response => {
+        isLoading = false;
+        resolve(response);
+      })
       .catch(error => {
+        isLoading = false;
         reject(error.response);
       });
   });
@@ -199,11 +213,15 @@ $(() => {
         const id = $(this).val();
         ids.push(id);
       });
+      if (!ids.length) {
+        return;
+      }
       removeHistory({
         ids: ids,
         type: 'partial'
       }).then(response => {
         if (response.isSuccess) {
+          removeItemsFromLoadedHistory(ids);
           $checkedRows.closest('.js-history-row').remove();
           $('.js-history-group').filter(function() {
             return !$(this).find('.js-history-row').length;
@@ -212,7 +230,7 @@ $(() => {
       });
     });
 
-  $(window).on('scroll', _.throttle(detectScroll, 100));
+  $(window).on('scroll', _.debounce(detectScroll, 500));
 
   $('.input-daterange input').each(function() {
     $(this).datepicker({

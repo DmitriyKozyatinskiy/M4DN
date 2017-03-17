@@ -39,9 +39,7 @@ class VisitsController extends Controller
       Visit::where('user_id', $user->id)->delete();
     } else {
       foreach ($request->data['ids'] as $id) {
-        if ($id && $id == $user->id) {
-          Visit::destroy($id);
-        }
+        Visit::where('user_id', $user->id)->where('id', $id)->delete();
       }
     }
 
@@ -71,6 +69,17 @@ class VisitsController extends Controller
     $hoursLimit = $user->plan->hours;
     $limitDate = Carbon::now()->subHours($hoursLimit);
 
+//    $whereArray = [];
+//    $orWhereArray = [];
+//    if ($device) {
+//      array_push($whereArray, ['user_id', '=', $user->id]);
+//    }
+//
+//    if ($keyword) {
+//      array_push($whereArray, ['title', 'like','%' . $keyword . '%']);
+//      array_push($orWhereArray, ['url', 'like','%' . $keyword . '%']);
+//    }
+
     $visits =
       Visit::where('user_id', $user->id)
         ->where('created_at', '>', $limitDate)
@@ -78,8 +87,10 @@ class VisitsController extends Controller
           return $query->where('device_id', $device);
         })
         ->when($keyword, function ($query) use ($keyword) {
-          return $query->where('title', 'like', '%' . $keyword . '%')
-            ->orWhere('url', 'like', '%' . $keyword . '%');
+          return $query->where(function ($query) use ($keyword) {
+            $query->where('title', 'like', '%' . $keyword . '%')
+              ->orWhere('url', 'like', '%' . $keyword . '%');
+          });
         })
         ->when(($startDate && $endDate), function ($query) use ($startDate, $endDate) {
           return $query->whereBetween('created_at', [$startDate, $endDate]);

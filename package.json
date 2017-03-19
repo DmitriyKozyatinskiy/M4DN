@@ -15,7 +15,6 @@
   "devDependencies": {
     "axios": "^0.15.2",
     "bootstrap-sass": "^3.3.7",
-    "cross-env": "^3.2.3",
     "laravel-elixir-babel": "^0.2.0",
     "laravel-mix": "*",
     "vue": "^2.0.1",
@@ -23,6 +22,7 @@
   },
   "dependencies": {
     "bootstrap-datepicker": "^1.6.4",
+    "cross-env": "^3.2.4",
     "enquire.js": "^2.1.6",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "jquery": "^3.1.1",

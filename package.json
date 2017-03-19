@@ -16,7 +16,7 @@
     "axios": "^0.15.2",
     "bootstrap-sass": "^3.3.7",
     "laravel-elixir-babel": "^0.2.0",
-    "vue": "^2.0.1",
+    "vue": "^2.0.1"
   },
   "dependencies": {
     "bootstrap-datepicker": "^1.6.4",

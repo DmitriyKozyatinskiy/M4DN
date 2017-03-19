@@ -15,6 +15,6 @@ require('./header');
 
 // Vue.component('history', require('./components/History.vue'));
 
-const app = new Vue({
-  el: '#app'
-});
+// const app = new Vue({
+//   el: '#app'
+// });

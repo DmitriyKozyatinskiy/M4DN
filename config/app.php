@@ -167,6 +167,7 @@ return [
      * Package Service Providers...
      */
     Laravel\Tinker\TinkerServiceProvider::class,
+    Collective\Html\HtmlServiceProvider::class,
 
     /*
      * Application Service Providers...
@@ -180,6 +181,7 @@ return [
     Barryvdh\Cors\ServiceProvider::class,
     Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
     Bestmomo\LaravelEmailConfirmation\ServiceProvider::class,
+    Skovmand\Mailchimp\MailchimpServiceProvider::class,
   ],
 
   /*
@@ -231,6 +233,9 @@ return [
 
     'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
     'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+
+    'Form' => Collective\Html\FormFacade::class,
+    'Html' => Collective\Html\HtmlFacade::class,
   ],
 
 ];

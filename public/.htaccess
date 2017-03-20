@@ -5,8 +5,9 @@
 
     RewriteEngine On
     RewriteBase /
-    
-    RewriteRule ^(.*)$ https://sneekr.herokuapp.com/$1 [P]
+
+    # RewriteRule ^(.*)$ https://sneekr.herokuapp.com/$1 [P]
+    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [P]
 
     RewriteCond %{HTTP:Authorization} ^(.*)
     RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]

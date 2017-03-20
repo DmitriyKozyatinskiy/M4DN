@@ -116,6 +116,7 @@ class AuthenticateController extends Controller
       'name' => $request['name'],
       'email' => $request['email'],
       'password' => bcrypt($request['password']),
+      'is_subscription_required' => $request['subscribe'],
       'api_token' => str_random(60)
     ]);
 

@@ -64,8 +64,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 
-Route::get('manageMailChimp', 'MailChimpController@manageMailChimp');
-Route::post('subscribe',['as'=>'subscribe', 'uses'=>'MailChimpController@subscribe']);
-Route::post('sendCompaign',['as'=>'sendCompaign', 'uses'=>'MailChimpController@sendCompaign']);
+//Route::get('manageMailChimp', 'MailChimpController@manageMailChimp');
+//Route::post('subscribe',['as'=>'subscribe', 'uses'=>'MailChimpController@subscribe']);
+//Route::post('sendCompaign',['as'=>'sendCompaign', 'uses'=>'MailChimpController@sendCompaign']);
 
 // Route::post('/api/v1/login', 'Auth\AuthenticateController@authenticate');

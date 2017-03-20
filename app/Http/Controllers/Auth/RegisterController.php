@@ -6,7 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 // use Illuminate\Foundation\Auth\RegistersUsers;
-use Bestmomo\LaravelEmailConfirmation\Traits\RegistersUsers;
+use App\Traits\RegistersUsers;
 use App\Plan;
 
 class RegisterController extends Controller
@@ -68,7 +68,8 @@ class RegisterController extends Controller
       'name' => $data['name'],
       'email' => $data['email'],
       'password' => bcrypt($data['password']),
-      'api_token' => str_random(60)
+      'is_subscription_required' => $data['subscribe'],
+      'api_token' => str_random(60),
     ]);
 
     $freePlan = Plan::where('price', 0)->first();

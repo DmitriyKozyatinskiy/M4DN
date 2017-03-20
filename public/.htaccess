@@ -11,10 +11,6 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
-    # Force SSL
-    RewriteCond %{HTTPS} !=on
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
 #    RewriteCond %{HTTP:X-Forwarded-Proto} !https
 #    RewriteRule !/status https://%{SERVER_NAME}%{REQUEST_URI} [L,R]
 
@@ -26,4 +22,8 @@
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Force SSL
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{SERVER_NAME}/$1 [R,L]
 </IfModule>

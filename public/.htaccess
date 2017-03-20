@@ -4,6 +4,7 @@
     </IfModule>
 
     RewriteEngine On
+    RewriteRule ^(.*)$   https://sneekr.herokuapp.com//$1   [P]
     RewriteCond %{HTTP:Authorization} ^(.*)
     RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
@@ -23,7 +24,7 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Force SSL
-    RewriteCond %{HTTPS} off
-    RewriteRule (.*) https://%{SERVER_NAME}/$1 [R,L]
+#    # Force SSL
+#    RewriteCond %{HTTPS} !=on
+#    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
 </IfModule>

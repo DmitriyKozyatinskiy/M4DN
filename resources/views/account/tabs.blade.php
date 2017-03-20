@@ -4,7 +4,7 @@
 <div>
     <ul class="nav nav-tabs" role="tablist">
         <li class="active">
-            <a href="{{ url('account/settings') }}" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+            <a href="{{ secure_url('account/settings') }}" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
         </li>
         <li>
             <a href="#subscription" aria-controls="subscription" role="tab" data-toggle="tab">Subscription</a>

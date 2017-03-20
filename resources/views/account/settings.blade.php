@@ -12,7 +12,7 @@
                 {{ session('settings-change-success') }}
               </div>
             @endif
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/account/settings') }}">
+            <form class="form-horizontal" role="form" method="POST" action="{{ secure_url('/account/settings') }}">
               {{ csrf_field() }}
 
               <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

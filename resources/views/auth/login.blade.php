@@ -17,7 +17,7 @@
                             {!! session('confirmation-danger') !!}
                         </div>
                     @endif
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ secure_url('/login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -64,7 +64,7 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
+                                <a class="btn btn-link" href="{{ secure_url('/password/reset') }}">
                                     Forgot Your Password?
                                 </a>
                             </div>

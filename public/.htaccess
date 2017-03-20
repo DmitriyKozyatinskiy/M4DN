@@ -15,8 +15,8 @@
 #    RewriteCond %{HTTPS} !=on
 #    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    RewriteCond %{HTTP:X-Forwarded-Proto} !https
-    RewriteRule !/status https://%{SERVER_NAME}%{REQUEST_URI} [L,R]
+#    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+#    RewriteRule !/status https://%{SERVER_NAME}%{REQUEST_URI} [L,R]
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container-fluid">
+  <div class="{{ Auth::check() ? 'container-fluid' : 'container' }}">
     <h3 class="Title">Privacy Policy</h3>
     <h4>General notes</h4>
     <p>

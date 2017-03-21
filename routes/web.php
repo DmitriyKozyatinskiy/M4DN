@@ -63,6 +63,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/privacy', function () {
+  return view('privacy');
+});
 
 //Route::get('manageMailChimp', 'MailChimpController@manageMailChimp');
 //Route::post('subscribe',['as'=>'subscribe', 'uses'=>'MailChimpController@subscribe']);

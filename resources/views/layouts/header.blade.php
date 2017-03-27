@@ -2,7 +2,7 @@
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="#" id="js-tray-trigger">
-        <img alt="Sneekr" title="Sneekr" src="{{ asset('images/tray.png')}}" class="Tray__Trigger js-tray-trigger">
+        <img alt="Sneekr" title="Sneekr" src="{{ secure_asset('images/tray.png')}}" class="Tray__Trigger js-tray-trigger">
       </a>
       <div class="Tray js-tray" id="js-tray">
         <a href="{{ secure_url('history') }}" class="Tray__Item">History</a>

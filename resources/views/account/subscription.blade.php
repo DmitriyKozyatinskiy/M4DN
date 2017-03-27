@@ -9,7 +9,7 @@
       </div>
     @endif
 
-    <form role="form" method="POST" action="{{ url('/account/subscription') }}">
+    <form role="form" method="POST" action="{{ secure_url('/account/subscription') }}">
       {{ csrf_field() }}
       <div class="row">
         @foreach ($braintreePlans as $plan)

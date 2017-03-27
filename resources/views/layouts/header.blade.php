@@ -31,7 +31,7 @@
             <ul class="dropdown-menu" role="menu">
               <li>
                 <a href="{{ secure_url('/logout') }}" id="js-logout">Logout</a>
-                <form class="Header__LogoutForm" id="logout-form" action="{{ url('/logout') }}" method="POST">
+                <form class="Header__LogoutForm" id="logout-form" action="{{ secure_url('/logout') }}" method="POST">
                   {{ csrf_field() }}
                 </form>
               </li>

@@ -1,4 +1,4 @@
-<form role="form"  method="POST" action="{{ url('/devices/delete') }}">
+<form role="form"  method="POST" action="{{ secure_url('/devices/delete') }}">
   {{ csrf_field() }}
   <input type="hidden" name="id" id="js-remove-device-id">
   <div class="text-right">

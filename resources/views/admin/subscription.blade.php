@@ -1,4 +1,4 @@
-<form role="form"  method="POST" action="{{ url('/admin/subscription') }}">
+<form role="form"  method="POST" action="{{ secure_url('/admin/subscription') }}">
   {{ csrf_field() }}
 
   <input type="hidden" name="braintree_id" value="{{ $plan->id }}">

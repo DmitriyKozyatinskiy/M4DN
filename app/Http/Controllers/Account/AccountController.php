@@ -26,7 +26,7 @@ class AccountController extends Controller
     $user->password = $request->password;
     $user->save();
 
-    return redirect()->route('account/settings')->with('settings-change-success', 'Profile updated!');;
+    return redirect()->route('account/settings')->with('settings-change-success', 'Profile updated!');
   }
 
   protected function setAdmin()
@@ -36,5 +36,16 @@ class AccountController extends Controller
     $user->save();
 
     return redirect()->route('home');
+  }
+
+  protected function setSubscription()
+  {
+    $clientToken = \Braintree_ClientToken::generate();
+    $user = Auth::user();
+    $customer = \Braintree_Customer::create([
+      'email' => 'mike.jones@example.com'
+    ]);
+    dump($customer->customer->id);
+    // $user->newSubscription('Basic', 'monthly')->create($clientToken);
   }
 }

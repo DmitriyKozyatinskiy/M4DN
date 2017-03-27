@@ -15,6 +15,7 @@ $title-margin-bottom: 15px;
 @import "Auth";
 @import "Subscription";
 @import "History";
+@import "braintree";
 
 html, body {
   height: 100%;

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Plan;
 
 class VisitsController extends Controller
 {
@@ -53,12 +54,12 @@ class VisitsController extends Controller
   public function get(Request $request)
   {
     $user = Auth::user();
-    if (!$user) {
-      return response()->json([
-        'status' => 401,
-        'statusText' => 'Unauthorized',
-        'isSuccess' => false
-      ], 401);
+      if (!$user) {
+        return response()->json([
+          'status' => 401,
+          'statusText' => 'Unauthorized',
+          'isSuccess' => false
+        ], 401);
     }
 
     $device = $request->device_id;
@@ -66,7 +67,12 @@ class VisitsController extends Controller
     $endDate = $request->end_date;
     $keyword = $request->keyword;
 
-    $hoursLimit = $user->plan->hours;
+    $hoursLimit = 0;
+    if ($user->subscribed('main')) {
+      $braintreePlanId = $user->subscription->braintree_plan;
+      $plan = Plan::where('braintree_id', $braintreePlanId)->first();
+      $hoursLimit = $plan->hours;
+    }
     $limitDate = Carbon::now()->subHours($hoursLimit);
 
 //    $whereArray = [];

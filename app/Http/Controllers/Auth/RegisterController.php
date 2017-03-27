@@ -72,11 +72,6 @@ class RegisterController extends Controller
       'api_token' => str_random(60),
     ]);
 
-    $freePlan = Plan::where('price', 0)->first();
-    if ($freePlan) {
-      $user->plan()->associate($freePlan);
-    }
-
     return $user;
   }
 }

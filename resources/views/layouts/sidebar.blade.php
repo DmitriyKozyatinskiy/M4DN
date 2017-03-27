@@ -3,6 +3,7 @@
   <a href="{{ secure_url('devices/show') }}" class="Sidebar__Item">Devices</a>
   <a href="{{ secure_url('downloads') }}" class="Sidebar__Item">Downloads</a>
   <a href="{{ secure_url('account/subscription') }}" class="Sidebar__Item">Subscription</a>
+  <a href="{{ secure_url('account/billing') }}" class="Sidebar__Item">Billing</a>
   <a href="{{ secure_url('account/settings') }}" class="Sidebar__Item">Account Settings</a>
 
   {{--@if (Auth::check() && Auth::user()->isAdmin)--}}

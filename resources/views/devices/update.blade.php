@@ -1,4 +1,4 @@
-<form role="form"  method="POST" action="{{ secure_url('/devices/update') }}">
+<form role="form"  method="POST" action="{{ url('/devices/update') }}">
   {{ csrf_field() }}
 
   <input type="hidden" name="id" value="{{ $device ? $device->id : '' }}">

@@ -14,29 +14,39 @@ class SubscriptionController extends Controller
     $this->middleware('admin');
   }
 
-  protected function show($id)
+  protected function show($braintree_id)
   {
-    $plan = Plan::find($id);
+    $savedPlan = Plan::where('braintree_id', $braintree_id)->first();
+    if ($savedPlan) {
+      $plan = $savedPlan;
+      $hours = $plan->hours;
+    } else {
+      $braintreePlans = \Braintree_Plan::all();
+      $plan = collect($braintreePlans)->where('id', $braintree_id)->first();
+      $hours = null;
+    }
 
-    return view('admin/subscription', ['plan' => $plan]);
+    return view('admin/subscription', ['plan' => $plan, 'hours' => $hours]);
   }
 
   protected function save(Request $request)
   {
     $this->validate($request, [
-      'name' => 'required|max:30',
-      'hours' => 'required|numeric',
-      'price' => 'required|numeric',
-      'description' => 'required|max:255'
+      'hours' => 'required|numeric'
     ]);
-
-    $plan = $request->id ? Plan::find($request->id) : new Plan();
-    $plan->name = $request->name;
-    $plan->devices = 10; //$data->devices;
-    $plan->hours = $request->hours;
-    $plan->price = $request->price ? $request->price : 0;
-    $plan->description = $request->description;
-    $plan->save();
+    $plan = Plan::where('braintree_id', $request->braintree_id)->first();
+    if ($plan) {
+      $plan->hours = $request->hours;
+      $plan->devices = 999;
+      $plan->save();
+    } else {
+      $plan = new Plan([
+        'braintree_id' => $request->braintree_id,
+        'hours' => $request->hours,
+        'devices' => 999,
+      ]);
+      $plan->save();
+    }
 
     //return $this->show($plan->id);
 

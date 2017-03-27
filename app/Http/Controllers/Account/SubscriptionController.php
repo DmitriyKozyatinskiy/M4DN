@@ -16,22 +16,42 @@ class SubscriptionController extends Controller
 
   protected function setActive(Request $request)
   {
-    $plan = Plan::find($request->subscription_id);
     $user = Auth::user();
-    $user->plan()->associate($plan);
-    $user->save();
+    if ($user->subscribed('main')) {
+      $user->subscription('main')->swap($request->subscription_id);
+    } else {
+      $braintreePlan = collect(\Braintree_Plan::all())->where('id', $request->subscription_id)->first();
+      if ($braintreePlan) {
+        $nonce = \Braintree_PaymentMethodNonce::create($user->braintree_payment_token);
+        $user->newSubscription('main', $braintreePlan->id)->create($nonce->paymentMethodNonce->nonce);
+      }
+    }
 
-    return redirect()->route('subscription/show');
+    return redirect()->route('subscription/show')->with('subscription-save-success', 'Subscription changed!');
   }
 
   protected function show()
   {
-    $plans = Plan::all()->sortBy('create_date');
-    $currentPlan = Auth::user()->plan;
-    if ($currentPlan) {
-      $plans->where('id', $currentPlan->id)->isActive = true;
+    $user = Auth::user();
+    $braintreePlans = \Braintree_Plan::all();
+    uasort($braintreePlans, function($a, $b) {
+      return ($a->price <= $b->price) ? -1 : 1;
+    });
+    $braintreePlans = collect($braintreePlans);
+    $currentBraintreePlan = $user->subscriptions()->first();
+
+    $clientToken = \Braintree_ClientToken::generate();
+    if (!$currentBraintreePlan) {
+      $currentBraintreePlan = $braintreePlans->where('price', '0.00')->first();
+      $currentBraintreePlan->braintree_plan = $currentBraintreePlan->id;
     }
 
-    return view('account/subscription', ['plans' => $plans, 'currentPlan' => $currentPlan]);
+    return view('account/subscription', [
+      'braintreeToken' => $clientToken,
+      'cardLastFour' => $user->card_last_four,
+      'cardType' => $user->card_type,
+      'currentBraintreePlan' => $currentBraintreePlan,
+      'braintreePlans' => $braintreePlans,
+    ]);
   }
 }

@@ -6,9 +6,10 @@ function setActiveSubscription(event) {
 }
 
 function openSettings(event) {
-  const id = $(event.target).data('id') || null;
+  const id = $(event.target).data('id');
+  const name = $(event.target).data('name');
   $.get(`/admin/subscription/${ id }`, response => {
-    const title = id ? 'Change plan settings' : 'Add new plan';
+    const title = `Change "${ name }" plan settings`;
     $('#js-modal-title').html(title);
     $('#js-modal-body').html(response);
     $('#js-modal').modal('show');

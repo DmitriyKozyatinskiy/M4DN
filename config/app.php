@@ -183,6 +183,7 @@ return [
     Bestmomo\LaravelEmailConfirmation\ServiceProvider::class,
     // Skovmand\Mailchimp\MailchimpServiceProvider::class,
     Spatie\Newsletter\NewsletterServiceProvider::class,
+    Laravel\Cashier\CashierServiceProvider::class,
   ],
 
   /*

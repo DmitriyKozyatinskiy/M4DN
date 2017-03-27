@@ -28,7 +28,8 @@ Route::get('/account/subscription', 'Account\SubscriptionController@show')
   ->middleware('login')
   ->name('subscription/show');
 Route::post('/account/subscription', 'Account\SubscriptionController@setActive')
-  ->middleware('login');
+  ->middleware('login')
+  ->name('subscription');
 
 Route::get('/devices/show', 'Devices\DevicesController@show')
   ->middleware('login')
@@ -58,14 +59,23 @@ Route::get('/downloads', function () {
   return view('downloads/show');
 })->middleware('login');
 
-Route::get('/account/set_admin', 'Account\AccountController@setAdmin');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/account/billing', 'Account\BillingController@show')
+  ->middleware('login');
+Route::post('/account/billing', 'Account\BillingController@save')
+  ->middleware('login');
+
 Route::get('/privacy', function () {
   return view('privacy');
 });
+
+
+Route::get('/account/set_admin', 'Account\AccountController@setAdmin');
+Route::get('/account/test_subscription', 'Account\AccountController@setSubscription')
+  ->middleware('login');
 
 //Route::get('manageMailChimp', 'MailChimpController@manageMailChimp');
 //Route::post('subscribe',['as'=>'subscribe', 'uses'=>'MailChimpController@subscribe']);

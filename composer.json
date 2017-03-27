@@ -10,6 +10,7 @@
         "bestmomo/laravel-email-confirmation": "^1.0",
         "doctrine/dbal": "^2.5",
         "illuminate/html": "5.*",
+        "laravel/cashier-braintree": "^2.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.3.0",

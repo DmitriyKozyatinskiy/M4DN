@@ -8,10 +8,13 @@ use Illuminate\Foundation\Auth\RegistersUsers as BaseRegistersUsers;
 use Bestmomo\LaravelEmailConfirmation\Notifications\ConfirmEmail;
 use Illuminate\Console\DetectsApplicationNamespace;
 use Spatie\Newsletter\NewsletterFacade as Newsletter;
+use Laravel\Cashier\Billable;
+use App\Plan;
+
 
 trait RegistersUsers
 {
-  use BaseRegistersUsers, DetectsApplicationNamespace;
+  use BaseRegistersUsers, DetectsApplicationNamespace, Billable;
 
   /**
    * Handle a registration request for the application.
@@ -54,8 +57,27 @@ trait RegistersUsers
       $user->is_subscribed = true;
     }
 
-    $user->save();
+    // $user->newSubscription('main', 'monthly')->create();
+    $braintreeCustomer = \Braintree_Customer::create([
+      'email' => $user->email
+    ]);
+    $user->braintree_id = $braintreeCustomer->customer->id;
 
+    $braintreeFreePlan = collect(\Braintree_Plan::all())->filter(function ($plan, $key) {
+      return $plan->price == 0;
+    })->first();
+
+//    if ($braintreeFreePlan) {
+//      $clientToken = \Braintree_ClientToken::generate();
+//      $user->newSubscription('main', $braintreeFreePlan->name)->create($clientToken);
+//    }
+
+//    $freePlan = Plan::where('price', 0)->first();
+//    if ($freePlan) {
+//      $user->plan()->associate($freePlan);
+//    }
+
+    $user->save();
 
     return redirect(route('login'))->with('confirmation-success', trans('confirmation::confirmation.success'));
   }

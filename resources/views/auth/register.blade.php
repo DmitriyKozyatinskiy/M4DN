@@ -16,7 +16,7 @@
                 <div class="alert alert-danger">
                   {{ session('registration-error') }}
                 </div>
-              @else
+              @endif
               <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                 {{ csrf_field() }}
 

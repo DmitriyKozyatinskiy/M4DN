@@ -12,6 +12,11 @@
                 {{ session('confirmation-success') }}
               </div>
             @else
+              @if (session('registration-error'))
+                <div class="alert alert-danger">
+                  {{ session('registration-error') }}
+                </div>
+              @else
               <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                 {{ csrf_field() }}
 

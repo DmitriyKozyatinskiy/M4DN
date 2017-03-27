@@ -9,7 +9,7 @@ use Bestmomo\LaravelEmailConfirmation\Notifications\ConfirmEmail;
 use Illuminate\Console\DetectsApplicationNamespace;
 use Spatie\Newsletter\NewsletterFacade as Newsletter;
 use Laravel\Cashier\Billable;
-use App\Plan;
+use App\User;
 
 
 trait RegistersUsers
@@ -25,6 +25,10 @@ trait RegistersUsers
   public function register(Request $request)
   {
     $this->validator($request->all())->validate();
+    $user = User::where('email', $request->email)->first();
+    if ($user) {
+      return back()->with('registration-error', 'Account with this email already exists.');
+    }
 
     $user = $this->create($request->all());
     $user->confirmation_code = str_random(30);

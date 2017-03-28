@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-md-8">
         <h4>
-          <a href="https://chrome.google.com/webstore/detail/nmgkmajdkiligmhlbdgknkjgflekehji"
+          <a href="https://chrome.google.com/webstore/detail/sneekr/plfkjhocdlikiendflhcgpbndefindap"
              target="_blank">Download extension from Chrome Store</a>
         </h4>
       </div>

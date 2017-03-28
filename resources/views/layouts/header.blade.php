@@ -2,7 +2,7 @@
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="#" id="js-tray-trigger">
-        <img alt="Sneekr" title="Sneekr" src="{{ secure_asset('images/tray.png')}}" class="Tray__Trigger js-tray-trigger">
+        <img alt="Sneekr" title="Sneekr" src="{{ asset('images/tray.png')}}" class="Tray__Trigger js-tray-trigger">
       </a>
       <div class="Tray js-tray" id="js-tray">
         <a href="{{ secure_url('history') }}" class="Tray__Item">History</a>
@@ -12,10 +12,18 @@
         <a href="{{ secure_url('account/settings') }}" class="Tray__Item">Account Settings</a>
         <a href="{{ secure_url('account/logout') }}" class="Tray__Item">Logout</a>
       </div>
+      <a class="Header__LogoImageContainer navbar-brand" href="{{ secure_url('/') }}">
+        <img alt="Sneekr" class="Header__LogoImage" title="Sneekr" src="{{ asset('images/icon48.png') }}">
+      </a>
       <a class="navbar-brand" href="{{ secure_url('/') }}">
         {{ config('app.name', 'Sneekr') }}
       </a>
     </div>
+
+    <div class="Header__AdContainer">
+      <img>
+    </div>
+
 
     <div class="collapse navbar-collapse" id="app-navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -31,7 +39,7 @@
             <ul class="dropdown-menu" role="menu">
               <li>
                 <a href="{{ secure_url('/logout') }}" id="js-logout">Logout</a>
-                <form class="Header__LogoutForm" id="logout-form" action="{{ secure_url('/logout') }}" method="POST">
+                <form class="Header__LogoutForm" id="logout-form" action="{{ url('/logout') }}" method="POST">
                   {{ csrf_field() }}
                 </form>
               </li>

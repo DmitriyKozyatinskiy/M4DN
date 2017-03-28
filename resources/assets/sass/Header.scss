@@ -1,7 +1,21 @@
+@import "variables";
+
 .Header {
   margin-bottom: 0;
 }
 
 .Header__LogoutForm {
   display: none;
+}
+
+.Header__LogoImageContainer {
+  @media (max-width: $sm-size) {
+    display: none !important;
+  }
+}
+
+.Header__LogoImage {
+  height: 45px;
+  position: relative;
+  bottom: 11px;
 }

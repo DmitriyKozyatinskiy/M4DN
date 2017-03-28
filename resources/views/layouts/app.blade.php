@@ -8,7 +8,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ config('app.name', 'Sneekr') }}</title>
 
-  <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <script>
     window.Laravel = <?php echo json_encode([
       'csrfToken' => csrf_token(),
@@ -18,7 +18,7 @@
 <body>
 <div id="app" class="container-fluid Wrapper">
   @include('layouts.header')
-  <div class="row Wrapper__Row">
+  <div class="Wrapper__Row {{ Auth::check() ? 'row' : '' }}">
     @if (Auth::check())
       <div class="col-sm-3 col-md-2">
         @include('layouts.sidebar')
@@ -36,7 +36,7 @@
   @include('layouts.modal')
 </div>
 
-<script src="{{ secure_asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 @stack('scripts')
 
 </body>

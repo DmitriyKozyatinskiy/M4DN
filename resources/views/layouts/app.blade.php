@@ -8,7 +8,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ config('app.name', 'Sneekr') }}</title>
 
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
   <script>
     window.Laravel = <?php echo json_encode([
       'csrfToken' => csrf_token(),
@@ -36,7 +36,7 @@
   @include('layouts.modal')
 </div>
 
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ secure_asset('js/app.js') }}"></script>
 @stack('scripts')
 
 </body>

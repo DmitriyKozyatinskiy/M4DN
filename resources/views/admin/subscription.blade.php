@@ -1,7 +1,7 @@
 <form role="form"  method="POST" action="{{ secure_url('/admin/subscription') }}">
   {{ csrf_field() }}
 
-  <input type="hidden" name="braintree_id" value="{{ $plan->id }}">
+  <input type="hidden" name="braintree_id" value="{{ $braintree_id }}">
   {{--<div class="form-group{{ $errors->has('devices') ? ' has-error' : '' }}">--}}
     {{--<label for="devices" class="control-label">Devices</label>--}}
     {{--<input id="devices" class="form-control" name="devices" value="{{ $plan ? $plan->devices : '' }}" required autofocus>--}}

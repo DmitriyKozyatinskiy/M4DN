@@ -64,7 +64,7 @@
                 <span class="text-muted">Payment information:</span>
                 <span class="Subscription__PaymentMethodValue">{{ $cardType }} •••• •••• •••• {{ $cardLastFour }}</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <a href="{{ url('account/billing') }}">Edit Payment</a>
+                <a href="{{ secure_url('account/billing') }}">Edit Payment</a>
               </li>
             </ul>
           </div>
@@ -76,7 +76,7 @@
         @endif
       @else
         <br>
-        <a href="{{ url('account/billing') }}" class="btn btn-primary">Add Payment Method</a>
+        <a href="{{ secure_url('account/billing') }}" class="btn btn-primary">Add Payment Method</a>
       @endif
     </form>
   </div>

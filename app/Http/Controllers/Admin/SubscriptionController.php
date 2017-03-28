@@ -20,13 +20,15 @@ class SubscriptionController extends Controller
     if ($savedPlan) {
       $plan = $savedPlan;
       $hours = $plan->hours;
+      $braintree_id = $plan->braintree_id;
     } else {
       $braintreePlans = \Braintree_Plan::all();
       $plan = collect($braintreePlans)->where('id', $braintree_id)->first();
+      $braintree_id = $plan->id;
       $hours = null;
     }
 
-    return view('admin/subscription', ['plan' => $plan, 'hours' => $hours]);
+    return view('admin/subscription', ['braintree_id' => $braintree_id, 'hours' => $hours]);
   }
 
   protected function save(Request $request)
@@ -40,6 +42,8 @@ class SubscriptionController extends Controller
       $plan->devices = 999;
       $plan->save();
     } else {
+      $plan = new Plan();
+      $plan->braintree_id = $request->braintree_id;
       $plan = new Plan([
         'braintree_id' => $request->braintree_id,
         'hours' => $request->hours,

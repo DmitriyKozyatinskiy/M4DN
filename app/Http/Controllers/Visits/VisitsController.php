@@ -67,10 +67,13 @@ class VisitsController extends Controller
     $endDate = $request->end_date;
     $keyword = $request->keyword;
 
-    $hoursLimit = 0;
     if ($user->subscribed('main')) {
-      $braintreePlanId = $user->subscription->braintree_plan;
+      $braintreePlanId = $user->subscription('main')->braintree_plan;
       $plan = Plan::where('braintree_id', $braintreePlanId)->first();
+      $hoursLimit = $plan->hours;
+    } else {
+      $braintreePlan = collect(\Braintree_Plan::all())->where('price', '0.00')->first();
+      $plan = Plan::where('braintree_id', $braintreePlan->id)->first();
       $hoursLimit = $plan->hours;
     }
     $limitDate = Carbon::now()->subHours($hoursLimit);

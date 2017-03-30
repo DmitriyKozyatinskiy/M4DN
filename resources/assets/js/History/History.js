@@ -117,6 +117,7 @@ function loadNewHistoryData(settings) {
         console.log(loadedHistory);
         setAds();
         renderHistory();
+        (adsbygoogle = window.adsbygoogle || []).push({});
       }
     });
   });

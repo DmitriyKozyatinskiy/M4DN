@@ -10459,6 +10459,18 @@ function detectScroll(event) {
   }
 }
 
+function setAds() {
+  if (loadedHistory.length && loadedHistory[0] && loadedHistory[0].visits) {
+    if (loadedHistory[0].visits.length >= 3) {
+      loadedHistory[0].visits[2].showAds = true;
+    } else {
+      if (loadedHistory[0].visits[0]) {
+        loadedHistory[0].visits[0].showAds = true;
+      }
+    }
+  }
+}
+
 function loadNewHistoryData(settings) {
   return new Promise(function (resolve, reject) {
     getHistory(settings).then(function (response) {
@@ -10466,6 +10478,7 @@ function loadNewHistoryData(settings) {
         var data = convertData(response.data);
         concatLoadedHistory(data);
         console.log(loadedHistory);
+        setAds();
         renderHistory();
       }
     });

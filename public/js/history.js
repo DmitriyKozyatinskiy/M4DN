@@ -10465,6 +10465,7 @@ function loadNewHistoryData(settings) {
       if (response.isSuccess) {
         var data = convertData(response.data);
         concatLoadedHistory(data);
+        console.log(loadedHistory);
         renderHistory();
       }
     });

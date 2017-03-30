@@ -102,6 +102,7 @@ function loadNewHistoryData(settings) {
       if (response.isSuccess) {
         let data = convertData(response.data);
         concatLoadedHistory(data);
+        console.log(loadedHistory);
         renderHistory();
       }
     });

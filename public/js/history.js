@@ -10464,6 +10464,7 @@ function setAds() {
   var isSecondtAdSet = false;
   var isThirdAdSet = false;
   var totalIterator = 0;
+  var adsAmount = 0;
 
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
@@ -10492,12 +10493,15 @@ function setAds() {
           if (totalIterator === 3) {
             visit.showAds = true;
             isFirstAdSet = true;
+            adsAmount = 1;
           } else if (totalIterator === 10) {
             visit.showAds = true;
             isSecondtAdSet = true;
+            adsAmount = 2;
           } else if (totalIterator === 20) {
             visit.showAds = true;
             isThirdAdSet = true;
+            adsAmount = 3;
           }
         }
       } catch (err) {
@@ -10530,19 +10534,7 @@ function setAds() {
     }
   }
 
-  loadedHistory.forEach(function (historyGroup) {
-    historyGroup.visits.forEach();
-  });
-
-  if (loadedHistory.length && loadedHistory[0] && loadedHistory[0].visits) {
-    if (loadedHistory[0].visits.length >= 3) {
-      loadedHistory[0].visits[2].showAds = true;
-    } else {
-      if (loadedHistory[0].visits[0]) {
-        loadedHistory[0].visits[0].showAds = true;
-      }
-    }
-  }
+  return adsAmount;
 }
 
 function loadNewHistoryData(settings) {
@@ -10552,9 +10544,11 @@ function loadNewHistoryData(settings) {
         var data = convertData(response.data);
         concatLoadedHistory(data);
         console.log(loadedHistory);
-        setAds();
+        var adsAmount = setAds();
         renderHistory();
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        for (var i = 0; i < adsAmount; i++) {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        }
       }
     });
   });

@@ -9,4 +9,13 @@
   {{--@if (Auth::check() && Auth::user()->isAdmin)--}}
   {{--<a href="#" class="Sidebar__Item">Admin Panel</a>--}}
   {{--@endif--}}
+
+  <div class="Sidebar__AdPanel">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4770238595923264"
+         data-ad-slot="8055149239"
+         data-ad-format="auto">
+    </ins>
+  </div>
 </div>

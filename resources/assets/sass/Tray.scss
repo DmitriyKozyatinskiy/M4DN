@@ -7,6 +7,7 @@
   right: 0;
   left: 0;
   border-top: 1px solid #d3e0e9;
+  z-index: 99999;
   background-color: white;
 
   //@media (max-width: $sm-size) {
@@ -21,11 +22,14 @@
   border-left: 1px solid #d3e0e9;
 }
 
-.Tray__Trigger {
+.Tray_TriggerContainer {
   display: none !important;
-  height: 100%;
 
   @media (max-width: $sm-size) {
     display: block !important;
   }
+}
+
+.Tray__Trigger {
+  height: 100%;
 }

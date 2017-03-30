@@ -10460,6 +10460,80 @@ function detectScroll(event) {
 }
 
 function setAds() {
+  var isFirstAdSet = false;
+  var isSecondtAdSet = false;
+  var isThirdAdSet = false;
+  var totalIterator = 0;
+
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = loadedHistory[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var historyGroup = _step.value;
+
+      if (isThirdAdSet) {
+        break;
+      }
+
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = historyGroup.visits[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var visit = _step2.value;
+
+          if (isThirdAdSet) {
+            break;
+          }
+          totalIterator = totalIterator + 1;
+          if (totalIterator === 3) {
+            visit.showAds = true;
+            isFirstAdSet = true;
+          } else if (totalIterator === 10) {
+            visit.showAds = true;
+            isSecondtAdSet = true;
+          } else if (totalIterator === 20) {
+            visit.showAds = true;
+            isThirdAdSet = true;
+          }
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  loadedHistory.forEach(function (historyGroup) {
+    historyGroup.visits.forEach();
+  });
+
   if (loadedHistory.length && loadedHistory[0] && loadedHistory[0].visits) {
     if (loadedHistory[0].visits.length >= 3) {
       loadedHistory[0].visits[2].showAds = true;

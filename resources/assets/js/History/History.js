@@ -97,6 +97,38 @@ function detectScroll(event) {
 }
 
 function setAds() {
+  let isFirstAdSet = false;
+  let isSecondtAdSet = false;
+  let isThirdAdSet = false;
+  let totalIterator = 0;
+
+  for (let historyGroup of loadedHistory) {
+    if (isThirdAdSet) {
+      break;
+    }
+
+    for (let visit of historyGroup.visits) {
+      if (isThirdAdSet) {
+        break;
+      }
+      totalIterator = totalIterator + 1;
+      if (totalIterator === 3) {
+        visit.showAds = true;
+        isFirstAdSet = true;
+      } else if (totalIterator === 10) {
+        visit.showAds = true;
+        isSecondtAdSet = true;
+      } else if (totalIterator === 20) {
+        visit.showAds = true;
+        isThirdAdSet = true;
+      }
+    }
+  }
+
+  loadedHistory.forEach(historyGroup => {
+    historyGroup.visits.forEach();
+  });
+
   if (loadedHistory.length && loadedHistory[0] && loadedHistory[0].visits) {
     if (loadedHistory[0].visits.length >= 3) {
       loadedHistory[0].visits[2].showAds = true;

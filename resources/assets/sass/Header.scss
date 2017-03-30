@@ -16,7 +16,7 @@
 .Header__LogoImageContainer {
   float: left;
   height: 50px;
-  padding: 14px 15px;
+  padding: 18px 15px 14px 0;
   font-size: 18px;
   line-height: 22px;
   color: #777;
@@ -46,6 +46,10 @@
     text-decoration: none;
     background-color: transparent;
   }
+}
+
+.Header__Link {
+  padding-top: 19px;
 }
 
 .Header__DropdownContainer {

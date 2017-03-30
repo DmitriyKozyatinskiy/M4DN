@@ -1,6 +1,6 @@
 function logout(event) {
     event.preventDefault();
-    document.getElementById('logout-form').submit();
+    document.getElementById('js-logout-form').submit();
 }
 
 function toggleTray(event) {
@@ -23,6 +23,6 @@ function closeTray(event) {
 }
 
 $(document)
-    .on('click', '#js-logout', logout)
+    .on('click', '.js-logout', logout)
     .on('click', 'body', closeTray)
     .on('click', '#js-tray-trigger', toggleTray);

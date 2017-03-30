@@ -3,15 +3,21 @@
     <div class="row">
       <div class="col-xs-4 col-sm-3 col-md-offset-1 col-lg-2">
         <a href="#" id="js-tray-trigger" class="Tray_TriggerContainer navbar-brand">
-          <img alt="Sneekr" title="Sneekr" src="{{ secure_asset('images/tray.png')}}" class="Tray__Trigger js-tray-trigger">
+          <img alt="Sneekr" title="Sneekr" src="{{ secure_asset('images/tray.png')}}"
+               class="Tray__Trigger js-tray-trigger">
         </a>
         <div class="Tray js-tray" id="js-tray">
-          <a href="{{ secure_url('history') }}" class="Tray__Item">History</a>
-          <a href="{{ secure_url('devices/show') }}" class="Tray__Item">Devices</a>
-          <a href="{{ secure_url('downloads') }}" class="Tray__Item">Downloads</a>
-          <a href="{{ secure_url('account/subscription') }}" class="Tray__Item">Subscription</a>
-          <a href="{{ secure_url('account/settings') }}" class="Tray__Item">Account Settings</a>
-          <a href="{{ secure_url('account/logout') }}" class="Tray__Item">Logout</a>
+          @if (Auth::check())
+            <a href="{{ secure_url('history') }}" class="Tray__Item">History</a>
+            <a href="{{ secure_url('devices/show') }}" class="Tray__Item">Devices</a>
+            <a href="{{ secure_url('downloads') }}" class="Tray__Item">Downloads</a>
+            <a href="{{ secure_url('account/subscription') }}" class="Tray__Item">Subscription</a>
+            <a href="{{ secure_url('account/settings') }}" class="Tray__Item">Account Settings</a>
+            <a href="{{ secure_url('account/logout') }}" class="Tray__Item js-logout">Logout</a>
+          @else
+            <a href="{{ secure_url('/login') }}" class="Tray__Item">Account Settings</a>
+            <a href="{{ secure_url('/register') }}" class="Tray__Item">Logout</a>
+          @endif
         </div>
         <a class="Header__LogoImageContainer" href="{{ secure_url('/') }}">
           <img alt="Sneekr" class="Header__LogoImage" title="Sneekr" src="{{ secure_asset('images/icon48.png') }}">
@@ -46,8 +52,8 @@
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="{{ secure_url('/logout') }}" id="js-logout">Logout</a>
-                  <form class="Header__LogoutForm" id="logout-form" action="{{ secure_url('/logout') }}" method="POST">
+                  <a href="{{ secure_url('/logout') }}" class="js-logout">Logout</a>
+                  <form class="Header__LogoutForm" id="js-logout-form" action="{{ secure_url('/logout') }}" method="POST">
                     {{ csrf_field() }}
                   </form>
                 </li>

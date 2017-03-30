@@ -40,7 +40,7 @@
             <li><a class="Header__Link" href="{{ secure_url('/register') }}">Registration</a></li>
           @else
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle Header__DropdownTrigger"
+              <a href="#" class="Header__Link dropdown-toggle Header__DropdownTrigger"
                  data-toggle="dropdown" role="button" aria-expanded="false">
                 {{ Auth::user()->name }} <span class="caret"></span>
               </a>

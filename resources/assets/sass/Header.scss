@@ -49,7 +49,8 @@
 }
 
 .Header__Link {
-  padding-top: 19px;
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
 }
 
 .Header__DropdownContainer {
@@ -59,7 +60,7 @@
 }
 
 .Header__DropdownTrigger {
-  padding: 13px 15px !important;
+  padding: 18px 15px !important;
   color: #333;
   text-decoration: none;
 

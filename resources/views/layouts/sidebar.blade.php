@@ -15,7 +15,7 @@
          style="display:block"
          data-ad-client="ca-pub-4770238595923264"
          data-ad-slot="8055149239"
-         data-ad-format="auto">
+         data-ad-format="vertical">
     </ins>
   </div>
 </div>

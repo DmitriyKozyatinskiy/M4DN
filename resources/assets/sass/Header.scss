@@ -1,6 +1,7 @@
 @import "variables";
 
 .Header {
+  height: 61px;
   margin-bottom: 0;
 
   border: 1px solid #d3e0e9;
@@ -34,7 +35,7 @@
 .Header__Title {
   float: left;
   height: 50px;
-  padding: 14px 15px 14px 0;
+  padding: 20px 15px 14px 0;
   font-size: 18px;
   line-height: 22px;
   color: #777;

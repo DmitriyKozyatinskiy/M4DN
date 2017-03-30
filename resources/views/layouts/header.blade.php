@@ -15,8 +15,8 @@
             <a href="{{ secure_url('account/settings') }}" class="Tray__Item">Account Settings</a>
             <a href="{{ secure_url('account/logout') }}" class="Tray__Item js-logout">Logout</a>
           @else
-            <a href="{{ secure_url('/login') }}" class="Tray__Item">Account Settings</a>
-            <a href="{{ secure_url('/register') }}" class="Tray__Item">Logout</a>
+            <a href="{{ secure_url('/login') }}" class="Tray__Item">Login</a>
+            <a href="{{ secure_url('/register') }}" class="Tray__Item">Registration</a>
           @endif
         </div>
         <a class="Header__LogoImageContainer" href="{{ secure_url('/') }}">

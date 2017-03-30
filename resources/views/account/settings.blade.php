@@ -12,6 +12,7 @@
                 {{ session('settings-change-success') }}
               </div>
             @endif
+            <a class="btn btn-link" href="{{ secure_url('account/billing') }}">Billing settings</a>
             <form class="form-horizontal" role="form" method="POST" action="{{ secure_url('/account/settings') }}">
               {{ csrf_field() }}
 

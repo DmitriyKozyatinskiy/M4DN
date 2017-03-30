@@ -22,12 +22,14 @@
       </div>
 
       <div class="Header__AdContainer col-xs-7 col-sm-3 col-md-4">
-        <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-4770238595923264"
-        data-ad-slot="8055149239"
-        data-ad-format="horizontal,rectangle">
-        </ins>
+        <div style="width: 100%;">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4770238595923264"
+               data-ad-slot="8055149239"
+               data-ad-format="horizontal,rectangle">
+          </ins>
+        </div>
       </div>
 
 

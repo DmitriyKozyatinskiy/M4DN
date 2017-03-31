@@ -9,6 +9,8 @@
   <title>{{ config('app.name', 'Sneekr') }}</title>
 
   <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+  <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/plfkjhocdlikiendflhcgpbndefindap">
+
   <script>
     window.Laravel = <?php echo json_encode([
       'csrfToken' => csrf_token(),
@@ -18,6 +20,11 @@
 <body>
 <div id="app" class="container-fluid Wrapper">
   @include('layouts.header')
+  <div class="col-xs-12 text-center InstallExtensionButtonContainer">
+    <button class="btn btn-info InstallExtensionButton" id="js-install-extension-button" type="button">
+      Install Extension
+    </button>
+  </div>
   <div class="Wrapper__Row {{ Auth::check() ? 'row' : '' }}">
     @if (Auth::check())
       <div class="col-sm-3 col-md-2">

@@ -25973,6 +25973,7 @@ return zhTw;
 
 __webpack_require__(255);
 __webpack_require__(256);
+__webpack_require__(423);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -50894,6 +50895,31 @@ if(false) {
 __webpack_require__(224);
 module.exports = __webpack_require__(228);
 
+
+/***/ }),
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+$ = window.$;
+
+$(document).on('click', '#js-install-extension-button', function () {
+  chrome.webstore.install('', function () {
+    $('#js-install-extension-button').remove();
+  });
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ })
 /******/ ]);

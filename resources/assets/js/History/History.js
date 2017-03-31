@@ -15,14 +15,19 @@ let isLoading = false;
 
 function getHistory(settings) {
   return new Promise((resolve, reject) => {
+    isLoading = true;
     const searchQuery = settings ? $.param(settings) : '';
     fetch(`/json/history?offset=${ offset }&` + searchQuery, {
       method: 'GET',
       credentials: 'include'
     })
       .then(checkRequestStatus)
-      .then(resolve)
+      .then(response => {
+        isLoading = false;
+        resolve(response);
+      })
       .catch(error => {
+        isLoading = false;
         reject(error.response);
       });
     offset = offset + OFFSET_SIZE;

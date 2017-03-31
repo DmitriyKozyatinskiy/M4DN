@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 412);
+/******/ 	return __webpack_require__(__webpack_require__.s = 413);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -119,7 +119,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 12:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10353,11 +10353,11 @@ return jQuery;
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-var _enquire = __webpack_require__(362);
+var _enquire = __webpack_require__(363);
 
 var _enquire2 = _interopRequireDefault(_enquire);
 
-var _History = __webpack_require__(371);
+var _History = __webpack_require__(372);
 
 var _History2 = _interopRequireDefault(_History);
 
@@ -10379,11 +10379,16 @@ var isLoading = false;
 
 function getHistory(settings) {
   return new Promise(function (resolve, reject) {
+    isLoading = true;
     var searchQuery = settings ? $.param(settings) : '';
     fetch('/json/history?offset=' + offset + '&' + searchQuery, {
       method: 'GET',
       credentials: 'include'
-    }).then(_helpers2.default).then(resolve).catch(function (error) {
+    }).then(_helpers2.default).then(function (response) {
+      isLoading = false;
+      resolve(response);
+    }).catch(function (error) {
+      isLoading = false;
       reject(error.response);
     });
     offset = offset + OFFSET_SIZE;
@@ -10684,14 +10689,14 @@ $(function () {
     $('#js-history-form-toggler').removeClass('hidden');
   });
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
 
-/***/ 359:
+/***/ 360:
 /***/ (function(module, exports, __webpack_require__) {
 
-var QueryHandler = __webpack_require__(361);
+var QueryHandler = __webpack_require__(362);
 var each = __webpack_require__(102).each;
 
 /**
@@ -10788,10 +10793,10 @@ module.exports = MediaQuery;
 
 /***/ }),
 
-/***/ 360:
+/***/ 361:
 /***/ (function(module, exports, __webpack_require__) {
 
-var MediaQuery = __webpack_require__(359);
+var MediaQuery = __webpack_require__(360);
 var Util = __webpack_require__(102);
 var each = Util.each;
 var isFunction = Util.isFunction;
@@ -10880,7 +10885,7 @@ module.exports = MediaQueryDispatch;
 
 /***/ }),
 
-/***/ 361:
+/***/ 362:
 /***/ (function(module, exports) {
 
 /**
@@ -10961,23 +10966,23 @@ module.exports = QueryHandler;
 
 /***/ }),
 
-/***/ 362:
+/***/ 363:
 /***/ (function(module, exports, __webpack_require__) {
 
-var MediaQueryDispatch = __webpack_require__(360);
+var MediaQueryDispatch = __webpack_require__(361);
 module.exports = new MediaQueryDispatch();
 
 
 /***/ }),
 
-/***/ 371:
+/***/ 372:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"js-history-group\">\r\n  {{ #visitGroups }}\r\n  <div class=\"clearfix\">\r\n    <div class=\"History__Header\">\r\n      <div class=\"checkbox\">\r\n        <label>\r\n          <input type=\"checkbox\" class=\"js-history-group-checkbox\">\r\n          <span>{{ groupName }}</span>\r\n        </label>\r\n      </div>\r\n      <!--<input type=\"checkbox\" value=\"{{ id }}\" class=\"js-history-remove-checkbox\">-->\r\n      <!--<span>{{ groupName }}</span>-->\r\n    </div>\r\n\r\n    {{ #visits }}\r\n    <div class=\"clearfix History__Row js-history-row\">\r\n      <div class=\"History__RemoveButton col-xs-1 text-center\">\r\n        <!--<a href=\"#\" class=\"text-muted js-remove-button\" data-id=\"{{ id }}\">-->\r\n        <!--<span class=\"glyphicon glyphicon-remove\" role=\"button\"></span>-->\r\n        <!--</a>-->\r\n        <input type=\"checkbox\" value=\"{{ id }}\" class=\"js-history-remove-checkbox\">\r\n      </div>\r\n      <div class=\"col-xs-3 col-md-2 col-lg-1 History__Col\">\r\n        <span class=\"History__Date\" title=\"{{ created_at }}\">{{ shortDate }}</span>\r\n        <br>\r\n        <span class=\"History__Device\" title=\"{{ device.userAgent }}\">{{ device.name }}</span>\r\n      </div>\r\n      <div class=\"col-xs-8 col-md-9 col-lg-10 History__Col\">\r\n        <a href=\"{{ url }}\" title=\"{{ url }}\">{{ url }}</a>\r\n        <br>\r\n        <span title=\"{{ title }}\">{{ title }}</span>\r\n      </div>\r\n      <!--<div class=\"col-xs-5 History__Col\">-->\r\n      <!--<span title=\"{{ title }}\">{{ title }}</span>-->\r\n      <!--</div>-->\r\n    </div>\r\n    {{ #showAds }}\r\n      <div class=\"clearfix History__Row History__Row--Ads js-history-row\">\r\n        <div class=\"col-xs-11 col-xs-offset-1\">\r\n          <ins class=\"adsbygoogle\"\r\n               style=\"display:block\"\r\n               data-ad-client=\"ca-pub-4770238595923264\"\r\n               data-ad-slot=\"9531882433\"\r\n               data-ad-format=\"link\">\r\n          </ins>\r\n        </div>\r\n      </div>\r\n    {{ /showAds }}\r\n\r\n    {{ /visits }}\r\n  </div>\r\n  {{/visitGroups}}\r\n</div>\r\n";
 
 /***/ }),
 
-/***/ 412:
+/***/ 413:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(223);

@@ -10439,6 +10439,15 @@ function removeItemsFromLoadedHistory(ids) {
 }
 
 function renderHistory() {
+  var $adContainer = $('#js-ads-container');
+  var $firstAdBlock = $('#js-first-ad-block');
+  var $secondAdBlock = $('#js-second-ad-block');
+  var $thirdAdBlock = $('#js-third-ad-block');
+
+  $firstAdBlock.appendTo($adContainer);
+  $secondAdBlock.appendTo($adContainer);
+  $thirdAdBlock.appendTo($adContainer);
+
   var $template = $(Mustache.render(_History2.default, {
     visitGroups: loadedHistory
   }));
@@ -10446,10 +10455,6 @@ function renderHistory() {
   selectedHistory.forEach(function (item) {
     $('.js-history-remove-checkbox[value=' + item + ']').prop('checked', true);
   });
-
-  if (isAdsLoaded) {
-    renderAds();
-  }
 }
 
 function renderAds() {

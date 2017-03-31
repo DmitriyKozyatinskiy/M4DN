@@ -10662,8 +10662,9 @@ function observeAds() {
       if (mutation.attributeName === 'data-adsbygoogle-status') {
         observer.disconnect();
         window.setTimeout(function () {
-          isAdsLoaded = true;
           $('#js-ads-container').addClass('hidden');
+          renderAds();
+          isAdsLoaded = true;
         }, 100);
       }
       console.log(mutation);

@@ -76,17 +76,6 @@ function removeItemsFromLoadedHistory(ids) {
 }
 
 function renderHistory() {
-  if (isAdsLoaded) {
-    const $adContainer = $('#js-ads-container');
-    const $firstAdBlock = $('#js-first-ad-block');
-    const $secondAdBlock = $('#js-second-ad-block');
-    const $thirdAdBlock = $('#js-third-ad-block');
-
-    $firstAdBlock.appendTo($adContainer);
-    $secondAdBlock.appendTo($adContainer);
-    $thirdAdBlock.appendTo($adContainer);
-  }
-
   const $template = $(Mustache.render(template, {
     visitGroups: loadedHistory
   }));
@@ -182,12 +171,12 @@ function loadNewHistoryData(settings) {
         let data = convertData(response.data);
         concatLoadedHistory(data);
         console.log(loadedHistory);
-        // const adsAmount = setAds();
+        const adsAmount = setAds();
         renderHistory();
 
-        // for (let i = 0; i < adsAmount; i++) {
-        //   (adsbygoogle = window.adsbygoogle || []).push({});
-        // }
+        for (let i = 0; i < adsAmount; i++) {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        }
       }
     });
   });
@@ -343,11 +332,11 @@ $(() => {
     });
   });
 
-  observeAds();
+  // observeAds();
   loadNewHistoryData();
-  (adsbygoogle = window.adsbygoogle || []).push({});
-  (adsbygoogle = window.adsbygoogle || []).push({});
-  (adsbygoogle = window.adsbygoogle || []).push({});
+  // (adsbygoogle = window.adsbygoogle || []).push({});
+  // (adsbygoogle = window.adsbygoogle || []).push({});
+  // (adsbygoogle = window.adsbygoogle || []).push({});
 
   enquire.register('(max-width:992px)', function () {
     $('#js-history-form-container').removeClass('in');

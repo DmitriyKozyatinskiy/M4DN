@@ -10439,17 +10439,6 @@ function removeItemsFromLoadedHistory(ids) {
 }
 
 function renderHistory() {
-  if (isAdsLoaded) {
-    var $adContainer = $('#js-ads-container');
-    var $firstAdBlock = $('#js-first-ad-block');
-    var $secondAdBlock = $('#js-second-ad-block');
-    var $thirdAdBlock = $('#js-third-ad-block');
-
-    $firstAdBlock.appendTo($adContainer);
-    $secondAdBlock.appendTo($adContainer);
-    $thirdAdBlock.appendTo($adContainer);
-  }
-
   var $template = $(Mustache.render(_History2.default, {
     visitGroups: loadedHistory
   }));
@@ -10587,12 +10576,12 @@ function loadNewHistoryData(settings) {
         var data = convertData(response.data);
         concatLoadedHistory(data);
         console.log(loadedHistory);
-        // const adsAmount = setAds();
+        var adsAmount = setAds();
         renderHistory();
 
-        // for (let i = 0; i < adsAmount; i++) {
-        //   (adsbygoogle = window.adsbygoogle || []).push({});
-        // }
+        for (var i = 0; i < adsAmount; i++) {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        }
       }
     });
   });
@@ -10740,11 +10729,11 @@ $(function () {
     });
   });
 
-  observeAds();
+  // observeAds();
   loadNewHistoryData();
-  (adsbygoogle = window.adsbygoogle || []).push({});
-  (adsbygoogle = window.adsbygoogle || []).push({});
-  (adsbygoogle = window.adsbygoogle || []).push({});
+  // (adsbygoogle = window.adsbygoogle || []).push({});
+  // (adsbygoogle = window.adsbygoogle || []).push({});
+  // (adsbygoogle = window.adsbygoogle || []).push({});
 
   _enquire2.default.register('(max-width:992px)', function () {
     $('#js-history-form-container').removeClass('in');
@@ -11040,7 +11029,7 @@ module.exports = new MediaQueryDispatch();
 /***/ 372:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"js-history-group\">\r\n  {{ #visitGroups }}\r\n  <div class=\"clearfix\">\r\n    <div class=\"History__Header\">\r\n      <div class=\"checkbox\">\r\n        <label>\r\n          <input type=\"checkbox\" class=\"js-history-group-checkbox\">\r\n          <span>{{ groupName }}</span>\r\n        </label>\r\n      </div>\r\n      <!--<input type=\"checkbox\" value=\"{{ id }}\" class=\"js-history-remove-checkbox\">-->\r\n      <!--<span>{{ groupName }}</span>-->\r\n    </div>\r\n\r\n    {{ #visits }}\r\n    <div class=\"clearfix History__Row js-history-row\">\r\n      <div class=\"History__RemoveButton col-xs-1 text-center\">\r\n        <!--<a href=\"#\" class=\"text-muted js-remove-button\" data-id=\"{{ id }}\">-->\r\n        <!--<span class=\"glyphicon glyphicon-remove\" role=\"button\"></span>-->\r\n        <!--</a>-->\r\n        <input type=\"checkbox\" value=\"{{ id }}\" class=\"js-history-remove-checkbox\">\r\n      </div>\r\n      <div class=\"col-xs-3 col-md-2 col-lg-1 History__Col\">\r\n        <span class=\"History__Date\" title=\"{{ created_at }}\">{{ shortDate }}</span>\r\n        <br>\r\n        <span class=\"History__Device\" title=\"{{ device.userAgent }}\">{{ device.name }}</span>\r\n      </div>\r\n      <div class=\"col-xs-8 col-md-9 col-lg-10 History__Col\">\r\n        <a href=\"{{ url }}\" title=\"{{ url }}\">{{ url }}</a>\r\n        <br>\r\n        <span title=\"{{ title }}\">{{ title }}</span>\r\n      </div>\r\n      <!--<div class=\"col-xs-5 History__Col\">-->\r\n      <!--<span title=\"{{ title }}\">{{ title }}</span>-->\r\n      <!--</div>-->\r\n    </div>\r\n    <!--{{ #showAds }}-->\r\n      <!--<div class=\"clearfix History__Row History__Row&#45;&#45;Ads js-history-row\">-->\r\n        <!--<div class=\"col-xs-11 col-xs-offset-1\">-->\r\n          <!--<ins class=\"adsbygoogle\"-->\r\n               <!--style=\"display:block\"-->\r\n               <!--data-ad-client=\"ca-pub-4770238595923264\"-->\r\n               <!--data-ad-slot=\"9531882433\"-->\r\n               <!--data-ad-format=\"link\">-->\r\n          <!--</ins>-->\r\n        <!--</div>-->\r\n      <!--</div>-->\r\n    <!--{{ /showAds }}-->\r\n\r\n    {{ /visits }}\r\n  </div>\r\n  {{/visitGroups}}\r\n</div>\r\n";
+module.exports = "<div class=\"js-history-group\">\r\n  {{ #visitGroups }}\r\n  <div class=\"clearfix\">\r\n    <div class=\"History__Header\">\r\n      <div class=\"checkbox\">\r\n        <label>\r\n          <input type=\"checkbox\" class=\"js-history-group-checkbox\">\r\n          <span>{{ groupName }}</span>\r\n        </label>\r\n      </div>\r\n      <!--<input type=\"checkbox\" value=\"{{ id }}\" class=\"js-history-remove-checkbox\">-->\r\n      <!--<span>{{ groupName }}</span>-->\r\n    </div>\r\n\r\n    {{ #visits }}\r\n    <div class=\"clearfix History__Row js-history-row\">\r\n      <div class=\"History__RemoveButton col-xs-1 text-center\">\r\n        <!--<a href=\"#\" class=\"text-muted js-remove-button\" data-id=\"{{ id }}\">-->\r\n        <!--<span class=\"glyphicon glyphicon-remove\" role=\"button\"></span>-->\r\n        <!--</a>-->\r\n        <input type=\"checkbox\" value=\"{{ id }}\" class=\"js-history-remove-checkbox\">\r\n      </div>\r\n      <div class=\"col-xs-3 col-md-2 col-lg-1 History__Col\">\r\n        <span class=\"History__Date\" title=\"{{ created_at }}\">{{ shortDate }}</span>\r\n        <br>\r\n        <span class=\"History__Device\" title=\"{{ device.userAgent }}\">{{ device.name }}</span>\r\n      </div>\r\n      <div class=\"col-xs-8 col-md-9 col-lg-10 History__Col\">\r\n        <a href=\"{{ url }}\" title=\"{{ url }}\">{{ url }}</a>\r\n        <br>\r\n        <span title=\"{{ title }}\">{{ title }}</span>\r\n      </div>\r\n      <!--<div class=\"col-xs-5 History__Col\">-->\r\n      <!--<span title=\"{{ title }}\">{{ title }}</span>-->\r\n      <!--</div>-->\r\n    </div>\r\n    {{ #showAds }}\r\n      <div class=\"clearfix History__Row History__Row--Ads js-history-row\">\r\n        <div class=\"col-xs-11 col-xs-offset-1\">\r\n          <ins class=\"adsbygoogle\"\r\n               style=\"display:block\"\r\n               data-ad-client=\"ca-pub-4770238595923264\"\r\n               data-ad-slot=\"9531882433\"\r\n               data-ad-format=\"link\">\r\n          </ins>\r\n        </div>\r\n      </div>\r\n    {{ /showAds }}\r\n\r\n    {{ /visits }}\r\n  </div>\r\n  {{/visitGroups}}\r\n</div>\r\n";
 
 /***/ }),
 

@@ -10448,17 +10448,17 @@ function renderHistory() {
 
   var $thirdBlock = $('.js-history-row:eq(2)');
   if ($thirdBlock.length) {
-    $thirdBlock.after($('.js-ads-row:eq(0)'));
+    $thirdBlock.after($('.js-ads-row:eq(0)').clone());
   }
 
   var $tenBlock = $('.js-history-row:eq(9)');
   if ($tenBlock.length) {
-    $thirdBlock.after($('.js-ads-row:eq(1)'));
+    $thirdBlock.after($('.js-ads-row:eq(1)').clone());
   }
 
   var $twentyBlock = $('.js-history-row:eq(19)');
   if ($twentyBlock.length) {
-    $thirdBlock.after($('.js-ads-row:eq(2)'));
+    $thirdBlock.after($('.js-ads-row:eq(2)').clone());
   }
 }
 
@@ -10645,7 +10645,9 @@ function observeAds() {
     mutations.forEach(function (mutation) {
       if (mutation.attributeName === 'data-adsbygoogle-status') {
         observer.disconnect();
-        $('#js-ads-container').addClass('hidden');
+        window.setTimeout(function () {
+          $('#js-ads-container').addClass('hidden');
+        }, 100);
       }
       console.log(mutation);
     });

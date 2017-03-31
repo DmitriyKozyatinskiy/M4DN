@@ -76,14 +76,16 @@ function removeItemsFromLoadedHistory(ids) {
 }
 
 function renderHistory() {
-  const $adContainer = $('#js-ads-container');
-  const $firstAdBlock = $('#js-first-ad-block');
-  const $secondAdBlock = $('#js-second-ad-block');
-  const $thirdAdBlock = $('#js-third-ad-block');
+  if (isAdsLoaded) {
+    const $adContainer = $('#js-ads-container');
+    const $firstAdBlock = $('#js-first-ad-block');
+    const $secondAdBlock = $('#js-second-ad-block');
+    const $thirdAdBlock = $('#js-third-ad-block');
 
-  $firstAdBlock.appendTo($adContainer);
-  $secondAdBlock.appendTo($adContainer);
-  $thirdAdBlock.appendTo($adContainer);
+    $firstAdBlock.appendTo($adContainer);
+    $secondAdBlock.appendTo($adContainer);
+    $thirdAdBlock.appendTo($adContainer);
+  }
 
   const $template = $(Mustache.render(template, {
     visitGroups: loadedHistory
@@ -265,7 +267,7 @@ function observeAds() {
       if (mutation.attributeName === 'data-adsbygoogle-status') {
         observer.disconnect();
         window.setTimeout(() => {
-          $('#js-ads-container').addClass('hidden');
+          // $('#js-ads-container').addClass('hidden');
           renderAds();
           isAdsLoaded = true;
         }, 100);

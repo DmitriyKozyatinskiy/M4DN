@@ -253,7 +253,7 @@ function observeAds() {
       if (mutation.attributeName === 'data-adsbygoogle-status') {
         observer.disconnect();
         window.setTimeout(() => {
-          $('#js-ads-container').addClass('hidden');
+          //$('#js-ads-container').addClass('hidden');
         }, 100);
       }
       console.log(mutation);

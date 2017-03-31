@@ -21,7 +21,7 @@
 <div id="app" class="container-fluid Wrapper">
   @include('layouts.header')
   <div class="col-xs-12 text-center InstallExtensionButtonContainer">
-    <button class="btn btn-info InstallExtensionButton" id="js-install-extension-button" type="button">
+    <button class="btn btn-primary InstallExtensionButton" id="js-install-extension-button" type="button">
       Install Extension
     </button>
   </div>

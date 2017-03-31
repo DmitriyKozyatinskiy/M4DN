@@ -10,7 +10,6 @@
           @if (Auth::check())
             <a href="{{ secure_url('history') }}" class="Tray__Item">History</a>
             <a href="{{ secure_url('devices/show') }}" class="Tray__Item">Devices</a>
-            <a href="{{ secure_url('downloads') }}" class="Tray__Item">Downloads</a>
             <a href="{{ secure_url('account/subscription') }}" class="Tray__Item">Subscription</a>
             <a href="{{ secure_url('account/settings') }}" class="Tray__Item">Account Settings</a>
             <a href="{{ secure_url('account/logout') }}" class="Tray__Item js-logout">Logout</a>

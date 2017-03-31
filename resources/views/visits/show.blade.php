@@ -69,7 +69,7 @@
                style="display:block"
                data-ad-client="ca-pub-4770238595923264"
                data-ad-slot="9531882433"
-               data-ad-format="link">
+               data-ad-format="link" id="js-ad-container">
           </ins>
         </div>
       </div>

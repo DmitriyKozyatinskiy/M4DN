@@ -10624,7 +10624,7 @@ function selectHistoryCheckbox(event) {
 }
 
 function observeAds() {
-  var adsContainer = document.getElementById('js-ads-container');
+  var adsContainer = document.getElementById('js-ad-container');
   var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
       console.log(mutation);

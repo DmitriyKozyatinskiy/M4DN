@@ -42,7 +42,7 @@
     </div>
 
 
-    <div class="History__Container hidden" id="js-ads-container">
+    <div class="History__Container" id="js-ads-container">
       <div class="clearfix History__Row History__Row--Ads js-ads-row">
         <div class="col-xs-11 col-xs-offset-1">
           <ins class="adsbygoogle"

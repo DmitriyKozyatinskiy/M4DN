@@ -221,6 +221,17 @@ function selectHistoryCheckbox(event) {
   $group.find('.js-history-group-checkbox').prop('checked', $checkboxes.length === $selectedCheckboxes.length);
 }
 
+function observeAds() {
+  const adsContainer = document.getElementById('js-ads-container');
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      console.log(mutation);
+    });
+  });
+  const config = { attributes: true };
+  observer.observe(adsContainer, config);
+}
+
 $(() => {
   const $startDate = $('#js-history-start-date');
   const $endDate = $('#js-history-end-date');
@@ -285,6 +296,7 @@ $(() => {
     });
   });
 
+  observeAds();
   loadNewHistoryData();
   (adsbygoogle = window.adsbygoogle || []).push({});
   (adsbygoogle = window.adsbygoogle || []).push({});

@@ -10623,6 +10623,17 @@ function selectHistoryCheckbox(event) {
   $group.find('.js-history-group-checkbox').prop('checked', $checkboxes.length === $selectedCheckboxes.length);
 }
 
+function observeAds() {
+  var adsContainer = document.getElementById('js-ads-container');
+  var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      console.log(mutation);
+    });
+  });
+  var config = { attributes: true };
+  observer.observe(adsContainer, config);
+}
+
 $(function () {
   var $startDate = $('#js-history-start-date');
   var $endDate = $('#js-history-end-date');
@@ -10682,6 +10693,7 @@ $(function () {
     });
   });
 
+  observeAds();
   loadNewHistoryData();
   (adsbygoogle = window.adsbygoogle || []).push({});
   (adsbygoogle = window.adsbygoogle || []).push({});

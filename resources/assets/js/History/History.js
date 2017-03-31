@@ -12,6 +12,7 @@ let offset = 0;
 let loadedHistory = [];
 let selectedHistory = [];
 let isLoading = false;
+let isAdsLoaded = false;
 
 function getHistory(settings) {
   return new Promise((resolve, reject) => {
@@ -75,6 +76,20 @@ function removeItemsFromLoadedHistory(ids) {
 }
 
 function renderHistory() {
+  const $template = $(Mustache.render(template, {
+    visitGroups: loadedHistory
+  }));
+  $('#js-history').html($template);
+  selectedHistory.forEach(item => {
+    $(`.js-history-remove-checkbox[value=${ item }]`).prop('checked', true);
+  });
+
+  if (isAdsLoaded) {
+    renderAds();
+  }
+}
+
+function renderAds() {
   const $adContainer = $('#js-ads-container');
   const $firstAdBlock = $('#js-first-ad-block');
   const $secondAdBlock = $('#js-second-ad-block');
@@ -84,14 +99,6 @@ function renderHistory() {
   $secondAdBlock.appendTo($adContainer);
   $thirdAdBlock.appendTo($adContainer);
 
-  const $template = $(Mustache.render(template, {
-    visitGroups: loadedHistory
-  }));
-  $('#js-history').html($template);
-  selectedHistory.forEach(item => {
-    $(`.js-history-remove-checkbox[value=${ item }]`).prop('checked', true);
-  });
-
   const $thirdBlock = $('.js-history-row:eq(2)');
   if ($thirdBlock.length) {
     $thirdBlock.after($firstAdBlock);
@@ -99,12 +106,12 @@ function renderHistory() {
 
   const $tenBlock = $('.js-history-row:eq(9)');
   if ($tenBlock.length) {
-    $thirdBlock.after($secondAdBlock);
+    $tenBlock.after($secondAdBlock);
   }
 
   const $twentyBlock = $('.js-history-row:eq(19)');
   if ($twentyBlock.length) {
-    $thirdBlock.after($thirdAdBlock);
+    $twentyBlock.after($thirdAdBlock);
   }
 }
 
@@ -253,7 +260,8 @@ function observeAds() {
       if (mutation.attributeName === 'data-adsbygoogle-status') {
         observer.disconnect();
         window.setTimeout(() => {
-          //$('#js-ads-container').addClass('hidden');
+          isAdsLoaded = true;
+          $('#js-ads-container').addClass('hidden');
         }, 100);
       }
       console.log(mutation);

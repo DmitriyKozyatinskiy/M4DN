@@ -42,6 +42,38 @@
     </div>
 
 
+    <div class="History__Container hidden" id="js-ads-container">
+      <div class="clearfix History__Row History__Row--Ads js-ads-row">
+        <div class="col-xs-11 col-xs-offset-1">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4770238595923264"
+               data-ad-slot="9531882433"
+               data-ad-format="link">
+          </ins>
+        </div>
+      </div>
+      <div class="clearfix History__Row History__Row--Ads js-ads-row">
+        <div class="col-xs-11 col-xs-offset-1">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4770238595923264"
+               data-ad-slot="9531882433"
+               data-ad-format="link">
+          </ins>
+        </div>
+      </div>
+      <div class="clearfix History__Row History__Row--Ads js-ads-row">
+        <div class="col-xs-11 col-xs-offset-1">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4770238595923264"
+               data-ad-slot="9531882433"
+               data-ad-format="link">
+          </ins>
+        </div>
+      </div>
+    </div>
     <div class="History__Container" id="js-history"></div>
     {{--<nav aria-label="Page navigation">--}}
       {{--<ul class="pagination">--}}

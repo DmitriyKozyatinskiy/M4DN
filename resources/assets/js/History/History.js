@@ -87,7 +87,7 @@ function renderHistory() {
 function detectScroll(event) {
   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !isLoading) {
     selectedHistory = [];
-    $('.js-history-remove-checkbox:checked').each(function() {
+    $('.js-history-remove-checkbox:checked').each(function () {
       const id = $(this).val();
       selectedHistory.push(id);
     });
@@ -146,9 +146,9 @@ function loadNewHistoryData(settings) {
         console.log(loadedHistory);
         const adsAmount = setAds();
         renderHistory();
-        for (let i = 0; i < adsAmount; i++) {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        }
+        // for (let i = 0; i < adsAmount; i++) {
+        //   (adsbygoogle = window.adsbygoogle || []).push({});
+        // }
       }
     });
   });
@@ -255,7 +255,7 @@ $(() => {
       event.preventDefault();
       const ids = [];
       const $checkedRows = $('.js-history-remove-checkbox:checked');
-      $checkedRows.each(function() {
+      $checkedRows.each(function () {
         const id = $(this).val();
         ids.push(id);
       });
@@ -269,7 +269,7 @@ $(() => {
         if (response.isSuccess) {
           removeItemsFromLoadedHistory(ids);
           $checkedRows.closest('.js-history-row').remove();
-          $('.js-history-group').filter(function() {
+          $('.js-history-group').filter(function () {
             return !$(this).find('.js-history-row').length;
           }).remove();
         }
@@ -278,7 +278,7 @@ $(() => {
 
   $(window).on('scroll', _.debounce(detectScroll, 500));
 
-  $('.input-daterange input').each(function() {
+  $('.input-daterange input').each(function () {
     $(this).datepicker({
       clearDates: true,
       format: 'YYYY-MM-DD HH:mm:ss'
@@ -286,10 +286,12 @@ $(() => {
   });
 
   loadNewHistoryData();
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({});
 
-
-    enquire.register('(max-width:992px)', function() {
-       $('#js-history-form-container').removeClass('in');
-       $('#js-history-form-toggler').removeClass('hidden');
-    });
+  enquire.register('(max-width:992px)', function () {
+    $('#js-history-form-container').removeClass('in');
+    $('#js-history-form-toggler').removeClass('hidden');
+  });
 });

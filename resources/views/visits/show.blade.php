@@ -43,7 +43,7 @@
 
 
     <div class="History__Container" id="js-ads-container">
-      <div class="clearfix History__Row History__Row--Ads js-ads-row">
+      <div class="clearfix History__Row History__Row--Ads js-ads-row" id="js-first-ad-block">
         <div class="col-xs-11 col-xs-offset-1">
           <ins class="adsbygoogle"
                style="display:block"
@@ -53,7 +53,7 @@
           </ins>
         </div>
       </div>
-      <div class="clearfix History__Row History__Row--Ads js-ads-row">
+      <div class="clearfix History__Row History__Row--Ads js-ads-row" id="js-second-ad-block">
         <div class="col-xs-11 col-xs-offset-1">
           <ins class="adsbygoogle"
                style="display:block"
@@ -63,7 +63,7 @@
           </ins>
         </div>
       </div>
-      <div class="clearfix History__Row History__Row--Ads js-ads-row">
+      <div class="clearfix History__Row History__Row--Ads js-ads-row" id="js-third-ad-block">
         <div class="col-xs-11 col-xs-offset-1">
           <ins class="adsbygoogle"
                style="display:block"

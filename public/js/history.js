@@ -10438,6 +10438,15 @@ function removeItemsFromLoadedHistory(ids) {
 }
 
 function renderHistory() {
+  var $adContainer = $('#js-ads-container');
+  var $firstAdBlock = $('#js-first-ad-block');
+  var $secondAdBlock = $('#js-second-ad-block');
+  var $thirdAdBlock = $('#js-third-ad-block');
+
+  $firstAdBlock.appendTo($adContainer);
+  $secondAdBlock.appendTo($adContainer);
+  $thirdAdBlock.appendTo($adContainer);
+
   var $template = $(Mustache.render(_History2.default, {
     visitGroups: loadedHistory
   }));
@@ -10448,17 +10457,17 @@ function renderHistory() {
 
   var $thirdBlock = $('.js-history-row:eq(2)');
   if ($thirdBlock.length) {
-    $thirdBlock.after($('.js-ads-row:eq(0)').clone());
+    $thirdBlock.after($firstAdBlock);
   }
 
   var $tenBlock = $('.js-history-row:eq(9)');
   if ($tenBlock.length) {
-    $thirdBlock.after($('.js-ads-row:eq(1)').clone());
+    $thirdBlock.after($secondAdBlock);
   }
 
   var $twentyBlock = $('.js-history-row:eq(19)');
   if ($twentyBlock.length) {
-    $thirdBlock.after($('.js-ads-row:eq(2)').clone());
+    $thirdBlock.after($thirdAdBlock);
   }
 }
 

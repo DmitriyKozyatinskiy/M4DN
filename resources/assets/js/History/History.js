@@ -82,6 +82,21 @@ function renderHistory() {
   selectedHistory.forEach(item => {
     $(`.js-history-remove-checkbox[value=${ item }]`).prop('checked', true);
   });
+
+  const $thirdBlock = $('.js-history-row:eq(2)');
+  if ($thirdBlock.length) {
+    $thirdBlock.after($('.js-ads-row:eq(0)'));
+  }
+
+  const $tenBlock = $('.js-history-row:eq(9)');
+  if ($tenBlock.length) {
+    $thirdBlock.after($('.js-ads-row:eq(1)'));
+  }
+
+  const $twentyBlock = $('.js-history-row:eq(19)');
+  if ($twentyBlock.length) {
+    $thirdBlock.after($('.js-ads-row:eq(2)'));
+  }
 }
 
 function detectScroll(event) {
@@ -144,8 +159,9 @@ function loadNewHistoryData(settings) {
         let data = convertData(response.data);
         concatLoadedHistory(data);
         console.log(loadedHistory);
-        const adsAmount = setAds();
+        // const adsAmount = setAds();
         renderHistory();
+
         // for (let i = 0; i < adsAmount; i++) {
         //   (adsbygoogle = window.adsbygoogle || []).push({});
         // }
@@ -223,8 +239,12 @@ function selectHistoryCheckbox(event) {
 
 function observeAds() {
   const adsContainer = document.getElementById('js-ad-container');
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      if (mutation.attributeName === 'data-adsbygoogle-status') {
+        observer.disconnect();
+        $('#js-ads-container').addClass('hidden');
+      }
       console.log(mutation);
     });
   });

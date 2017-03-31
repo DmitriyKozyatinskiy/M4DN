@@ -10445,6 +10445,21 @@ function renderHistory() {
   selectedHistory.forEach(function (item) {
     $('.js-history-remove-checkbox[value=' + item + ']').prop('checked', true);
   });
+
+  var $thirdBlock = $('.js-history-row:eq(2)');
+  if ($thirdBlock.length) {
+    $thirdBlock.after($('.js-ads-row:eq(0)'));
+  }
+
+  var $tenBlock = $('.js-history-row:eq(9)');
+  if ($tenBlock.length) {
+    $thirdBlock.after($('.js-ads-row:eq(1)'));
+  }
+
+  var $twentyBlock = $('.js-history-row:eq(19)');
+  if ($twentyBlock.length) {
+    $thirdBlock.after($('.js-ads-row:eq(2)'));
+  }
 }
 
 function detectScroll(event) {
@@ -10549,8 +10564,9 @@ function loadNewHistoryData(settings) {
         var data = convertData(response.data);
         concatLoadedHistory(data);
         console.log(loadedHistory);
-        var adsAmount = setAds();
+        // const adsAmount = setAds();
         renderHistory();
+
         // for (let i = 0; i < adsAmount; i++) {
         //   (adsbygoogle = window.adsbygoogle || []).push({});
         // }
@@ -10627,6 +10643,10 @@ function observeAds() {
   var adsContainer = document.getElementById('js-ad-container');
   var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
+      if (mutation.attributeName === 'data-adsbygoogle-status') {
+        observer.disconnect();
+        $('#js-ads-container').addClass('hidden');
+      }
       console.log(mutation);
     });
   });

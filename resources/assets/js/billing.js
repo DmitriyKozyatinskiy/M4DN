@@ -40,6 +40,10 @@ braintree.client.create({
       expirationYear: {
         selector: '#expiration-year',
         placeholder: 'YY'
+      },
+      postalCode: {
+        selector: '#postal-code',
+        placeholder: '90210'
       }
     }
   }, function (err, hostedFieldsInstance) {
@@ -138,7 +142,10 @@ function sendNonce(nonce) {
         'X-CSRF-TOKEN': window.axios.defaults.headers.common['X-CSRF-TOKEN']
       },
       body: JSON.stringify({
-        nonce: nonce
+        nonce: nonce,
+        firstName: $('#js-braintree-user-first-name').val(),
+        lastName: $('#js-braintree-user-last-name').val(),
+        address: $('#js-braintree-user-address').val()
       })
     })
       .then(checkRequestStatus)

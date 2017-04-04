@@ -37,7 +37,10 @@ class BillingController extends Controller
 //          'verifyCard' => true
 //        ]
 //      ]);
-      $user->createAsBraintreeCustomerTrait($request->nonce);
+      $user->createAsBraintreeCustomerTrait($request->nonce, [
+        'firstName' => $request->firstName,
+        'lastName' => $request->lastName,
+      ], $request->address);
       // $user->braintree_payment_token = $request->nonce;
       $user->save();
     } catch (Exception $e) {
@@ -59,10 +62,6 @@ class BillingController extends Controller
 
   public function show(Request $request)
   {
-    $braintreeFreePlan = collect(\Braintree_Plan::all())->filter(function ($plan, $key) {
-      return $plan->price == 0;
-    })->first();
-
     $clientToken = \Braintree_ClientToken::generate();
     return view('account/billing', [
       'braintreeToken' => $clientToken,

@@ -72,7 +72,7 @@ class BillingController extends Controller
     $braintreeCustomer = \Braintree_Customer::find($user->braintree_id);
     $paymentMethods = \collect($braintreeCustomer->paymentMethods);
     $defaultPaymentMethod = $paymentMethods->where('default', true)->first();
-    $isPayPal = !isset($defaultPaymentMethod->last4);
+    $isPayPal = $defaultPaymentMethod && !isset($defaultPaymentMethod->last4);
     return view('account/billing', [
       'braintreeToken' => $clientToken,
       'isPayPal' => $isPayPal,

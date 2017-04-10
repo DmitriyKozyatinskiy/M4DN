@@ -43,7 +43,6 @@ class SubscriptionController extends Controller
     $braintreeCustomer = \Braintree_Customer::find($user->braintree_id);
     $paymentMethods = \collect($braintreeCustomer->paymentMethods);
     $defaultPaymentMethod = $paymentMethods->where('default', true)->first();
-    dump($defaultPaymentMethod);
     $isPayPal = ($defaultPaymentMethod && !isset($defaultPaymentMethod->last4));
 
     $clientToken = \Braintree_ClientToken::generate();

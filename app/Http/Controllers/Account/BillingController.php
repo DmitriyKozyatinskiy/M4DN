@@ -77,7 +77,7 @@ class BillingController extends Controller
     return view('account/billing', [
       'braintreeToken' => $clientToken,
       'isPayPal' => $isPayPal,
-      'cardLastFour' => $isPayPal ? null : $defaultPaymentMethod->last4,
+      'cardLastFour' => (!$defaultPaymentMethod || $isPayPal) ? null : $defaultPaymentMethod->last4,
       'firstName' => $braintreeCustomer->firstName,
       'lastName' => $braintreeCustomer->lastName
     ]);

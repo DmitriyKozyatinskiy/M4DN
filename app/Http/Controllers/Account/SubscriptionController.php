@@ -54,7 +54,7 @@ class SubscriptionController extends Controller
 
     return view('account/subscription', [
       'braintreeToken' => $clientToken,
-      'cardLastFour' => $isPayPal ? null : $defaultPaymentMethod->last4,
+      'cardLastFour' => (!$defaultPaymentMethod || $isPayPal) ? null : $defaultPaymentMethod->last4,
       'cardType' => $isPayPal ? null : $user->card_type,
       'currentBraintreePlan' => $currentBraintreePlan,
       'braintreePlans' => $braintreePlans,

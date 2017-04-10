@@ -4,6 +4,15 @@ import checkRequestStatus from './helpers';
 
 const $warning = $('#js-billing-warning');
 
+const $collapsableGroups = $('#js-billing-group-card, #js-billing-group-paypal');
+$collapsableGroups.on('show.bs.collapse', event => {
+  $(event.target).parent().find('.js-billing-group-arrow').addClass('Billing_SectionArrow--Rotated');
+});
+$collapsableGroups.on('hide.bs.collapse', event => {
+  $(event.target).parent().find('.js-billing-group-arrow').removeClass('Billing_SectionArrow--Rotated');
+});
+
+
 braintree.client.create({
   authorization: window.braintreeToken
 }, function (err, clientInstance) {

@@ -37,10 +37,15 @@ class BillingController extends Controller
 //          'verifyCard' => true
 //        ]
 //      ]);
-      $user->createAsBraintreeCustomerTrait($request->nonce, [
-        'firstName' => $request->firstName,
-        'lastName' => $request->lastName,
-      ], $request->address);
+      if ($request->isPayPal) {
+        $user->createAsBraintreeCustomerTrait($request->nonce, [], null, true);
+      } else {
+        $user->createAsBraintreeCustomerTrait($request->nonce, [
+          'firstName' => $request->firstName,
+          'lastName' => $request->lastName,
+        ], $request->address);
+      }
+
       // $user->braintree_payment_token = $request->nonce;
       $user->save();
     } catch (Exception $e) {
@@ -63,9 +68,17 @@ class BillingController extends Controller
   public function show(Request $request)
   {
     $clientToken = \Braintree_ClientToken::generate();
+    $user = Auth::user();
+    $braintreeCustomer = \Braintree_Customer::find($user->braintree_id);
+    $paymentMethods = \collect($braintreeCustomer->paymentMethods);
+    $defaultPaymentMethod = $paymentMethods->where('default', true)->first();
+    $isPayPal = !isset($defaultPaymentMethod->last4);
     return view('account/billing', [
       'braintreeToken' => $clientToken,
-      'cardLastFour' => Auth::user()->card_last_four
+      'isPayPal' => $isPayPal,
+      'cardLastFour' => $isPayPal ? null : $defaultPaymentMethod->last4,
+      'firstName' => $braintreeCustomer->firstName,
+      'lastName' => $braintreeCustomer->lastName
     ]);
   }
 }

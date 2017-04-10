@@ -8,7 +8,6 @@ use Braintree\PayPalAccount;
 use Braintree\Customer as BraintreeCustomer;
 use Braintree\Transaction as BraintreeTransaction;
 use Braintree\Subscription as BraintreeSubscription;
-use Auth;
 
 trait BillableTrait
 {
@@ -17,9 +16,11 @@ trait BillableTrait
    *
    * @param  string  $token
    * @param  array  $options
+   * @param string $address
+   * @param boolean $isPayPal
    * @return \Braintree\Customer
    */
-  public function createAsBraintreeCustomerTrait($token, array $options = [], $address = null)
+  public function createAsBraintreeCustomerTrait($token, array $options = [], $address = null, $isPayPal = false)
   {
 
 //    $address = \Braintree_Address::create([
@@ -44,28 +45,45 @@ trait BillableTrait
 //      ]
 //    );
 
-    $response = BraintreeCustomer::create(
-      array_replace_recursive([
-        'firstName' => Arr::get(explode(' ', $this->name), 0),
-        'lastName' => Arr::get(explode(' ', $this->name), 1),
-        'email' => $this->email,
-        'paymentMethodNonce' => $token,
-        'creditCard' => [
-          'options' => [
-            'verifyCard' => true,
-            'makeDefault' => true,
-          ],
-          'billingAddress' => [
-            'firstName' => $options['firstName'],
-            'lastName' => $options['lastName'],
-            'extendedAddress' => $address,
-          ]
+    $paymentData = $isPayPal ? [
+      'paymentMethodNonce' => $token,
+      'creditCard' => [
+        'options' => [
+          'verifyCard' => true,
+          'makeDefault' => true,
         ],
-      ], $options)
-    );
+      ],
+    ] : [
+      'firstName' => Arr::get(explode(' ', $this->name), 0),
+      'lastName' => Arr::get(explode(' ', $this->name), 1),
+      'email' => $this->email,
+      'paymentMethodNonce' => $token,
+      'creditCard' => [
+        'options' => [
+          'verifyCard' => true,
+          'makeDefault' => true,
+        ],
+        'billingAddress' => [
+          'firstName' => $options['firstName'],
+          'lastName' => $options['lastName'],
+          'extendedAddress' => $address,
+        ],
+      ],
+    ];
+
+    if ($this->braintree_id) {
+      $response = BraintreeCustomer::update(
+        $this->braintree_id,
+        array_replace_recursive($paymentData, $options)
+      );
+    } else {
+      $response = BraintreeCustomer::create(
+        array_replace_recursive($paymentData, $options)
+      );
+    }
 
     if (!$response->success) {
-      throw new Exception('Unable to create Braintree customer: '.$response->message);
+      throw new Exception('Unable to create Braintree customer: ' . $response->message);
     }
 
     $paymentMethod = $response->customer->paymentMethods[0];

@@ -63,63 +63,12 @@
 /******/ 	__webpack_require__.p = "./";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 413);
+/******/ 	return __webpack_require__(__webpack_require__.s = 414);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 102:
-/***/ (function(module, exports) {
-
-/**
- * Helper function for iterating over a collection
- *
- * @param collection
- * @param fn
- */
-function each(collection, fn) {
-    var i      = 0,
-        length = collection.length,
-        cont;
-
-    for(i; i < length; i++) {
-        cont = fn(collection[i], i);
-        if(cont === false) {
-            break; //allow early exit
-        }
-    }
-}
-
-/**
- * Helper function for determining whether target object is an array
- *
- * @param target the object under test
- * @return {Boolean} true if array, false otherwise
- */
-function isArray(target) {
-    return Object.prototype.toString.apply(target) === '[object Array]';
-}
-
-/**
- * Helper function for determining whether target object is a function
- *
- * @param target the object under test
- * @return {Boolean} true if function, false otherwise
- */
-function isFunction(target) {
-    return typeof target === 'function';
-}
-
-module.exports = {
-    isFunction : isFunction,
-    isArray : isArray,
-    each : each
-};
-
-
-/***/ }),
-
-/***/ 11:
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10347,21 +10296,72 @@ return jQuery;
 
 /***/ }),
 
-/***/ 223:
+/***/ 103:
+/***/ (function(module, exports) {
+
+/**
+ * Helper function for iterating over a collection
+ *
+ * @param collection
+ * @param fn
+ */
+function each(collection, fn) {
+    var i      = 0,
+        length = collection.length,
+        cont;
+
+    for(i; i < length; i++) {
+        cont = fn(collection[i], i);
+        if(cont === false) {
+            break; //allow early exit
+        }
+    }
+}
+
+/**
+ * Helper function for determining whether target object is an array
+ *
+ * @param target the object under test
+ * @return {Boolean} true if array, false otherwise
+ */
+function isArray(target) {
+    return Object.prototype.toString.apply(target) === '[object Array]';
+}
+
+/**
+ * Helper function for determining whether target object is a function
+ *
+ * @param target the object under test
+ * @return {Boolean} true if function, false otherwise
+ */
+function isFunction(target) {
+    return typeof target === 'function';
+}
+
+module.exports = {
+    isFunction : isFunction,
+    isArray : isArray,
+    each : each
+};
+
+
+/***/ }),
+
+/***/ 224:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
-var _enquire = __webpack_require__(363);
+var _enquire = __webpack_require__(364);
 
 var _enquire2 = _interopRequireDefault(_enquire);
 
-var _History = __webpack_require__(372);
+var _History = __webpack_require__(373);
 
 var _History2 = _interopRequireDefault(_History);
 
-var _helpers = __webpack_require__(48);
+var _helpers = __webpack_require__(33);
 
 var _helpers2 = _interopRequireDefault(_helpers);
 
@@ -10740,15 +10740,39 @@ $(function () {
     $('#js-history-form-toggler').removeClass('hidden');
   });
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
 
-/***/ 360:
+/***/ 33:
 /***/ (function(module, exports, __webpack_require__) {
 
-var QueryHandler = __webpack_require__(362);
-var each = __webpack_require__(102).each;
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = checkRequestStatus;
+function checkRequestStatus(response) {
+  if (response.ok) {
+    return response.json();
+  } else {
+    var error = new Error(response.statusText);
+    return response.json().then(function (data) {
+      error.response = data;
+      throw error;
+    });
+  }
+}
+
+/***/ }),
+
+/***/ 361:
+/***/ (function(module, exports, __webpack_require__) {
+
+var QueryHandler = __webpack_require__(363);
+var each = __webpack_require__(103).each;
 
 /**
  * Represents a single media query, manages it's state and registered handlers for this query
@@ -10844,11 +10868,11 @@ module.exports = MediaQuery;
 
 /***/ }),
 
-/***/ 361:
+/***/ 362:
 /***/ (function(module, exports, __webpack_require__) {
 
-var MediaQuery = __webpack_require__(360);
-var Util = __webpack_require__(102);
+var MediaQuery = __webpack_require__(361);
+var Util = __webpack_require__(103);
 var each = Util.each;
 var isFunction = Util.isFunction;
 var isArray = Util.isArray;
@@ -10936,7 +10960,7 @@ module.exports = MediaQueryDispatch;
 
 /***/ }),
 
-/***/ 362:
+/***/ 363:
 /***/ (function(module, exports) {
 
 /**
@@ -11017,51 +11041,27 @@ module.exports = QueryHandler;
 
 /***/ }),
 
-/***/ 363:
+/***/ 364:
 /***/ (function(module, exports, __webpack_require__) {
 
-var MediaQueryDispatch = __webpack_require__(361);
+var MediaQueryDispatch = __webpack_require__(362);
 module.exports = new MediaQueryDispatch();
 
 
 /***/ }),
 
-/***/ 372:
+/***/ 373:
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"js-history-group\">\r\n  {{ #visitGroups }}\r\n  <div class=\"clearfix\">\r\n    <div class=\"History__Header\">\r\n      <div class=\"checkbox\">\r\n        <label>\r\n          <input type=\"checkbox\" class=\"js-history-group-checkbox\">\r\n          <span>{{ groupName }}</span>\r\n        </label>\r\n      </div>\r\n      <!--<input type=\"checkbox\" value=\"{{ id }}\" class=\"js-history-remove-checkbox\">-->\r\n      <!--<span>{{ groupName }}</span>-->\r\n    </div>\r\n\r\n    {{ #visits }}\r\n    <div class=\"clearfix History__Row js-history-row\">\r\n      <div class=\"History__RemoveButton col-xs-1 text-center\">\r\n        <!--<a href=\"#\" class=\"text-muted js-remove-button\" data-id=\"{{ id }}\">-->\r\n        <!--<span class=\"glyphicon glyphicon-remove\" role=\"button\"></span>-->\r\n        <!--</a>-->\r\n        <input type=\"checkbox\" value=\"{{ id }}\" class=\"js-history-remove-checkbox\">\r\n      </div>\r\n      <div class=\"col-xs-3 col-md-2 col-lg-1 History__Col\">\r\n        <span class=\"History__Date\" title=\"{{ created_at }}\">{{ shortDate }}</span>\r\n        <br>\r\n        <span class=\"History__Device\" title=\"{{ device.userAgent }}\">{{ device.name }}</span>\r\n      </div>\r\n      <div class=\"col-xs-8 col-md-9 col-lg-10 History__Col\">\r\n        <a href=\"{{ url }}\" title=\"{{ url }}\">{{ url }}</a>\r\n        <br>\r\n        <span title=\"{{ title }}\">{{ title }}</span>\r\n      </div>\r\n      <!--<div class=\"col-xs-5 History__Col\">-->\r\n      <!--<span title=\"{{ title }}\">{{ title }}</span>-->\r\n      <!--</div>-->\r\n    </div>\r\n    {{ #showAds }}\r\n      <div class=\"clearfix History__Row History__Row--Ads js-history-row\">\r\n        <div class=\"col-xs-11 col-xs-offset-1\">\r\n          <ins class=\"adsbygoogle\"\r\n               style=\"display:block\"\r\n               data-ad-client=\"ca-pub-4770238595923264\"\r\n               data-ad-slot=\"9531882433\"\r\n               data-ad-format=\"link\">\r\n          </ins>\r\n        </div>\r\n      </div>\r\n    {{ /showAds }}\r\n\r\n    {{ /visits }}\r\n  </div>\r\n  {{/visitGroups}}\r\n</div>\r\n";
 
 /***/ }),
 
-/***/ 413:
+/***/ 414:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(223);
+module.exports = __webpack_require__(224);
 
-
-/***/ }),
-
-/***/ 48:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = checkRequestStatus;
-function checkRequestStatus(response) {
-  if (response.ok) {
-    return response.json();
-  } else {
-    var error = new Error(response.statusText);
-    return response.json().then(function (data) {
-      error.response = data;
-      throw error;
-    });
-  }
-}
 
 /***/ })
 

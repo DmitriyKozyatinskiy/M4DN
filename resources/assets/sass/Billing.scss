@@ -1,0 +1,9 @@
+.Billing_SectionArrow--Rotated {
+  transform: rotate(90deg);
+}
+
+.Billing_SectionToggler {
+  &:focus, &:hover {
+    text-decoration: none;
+  }
+}

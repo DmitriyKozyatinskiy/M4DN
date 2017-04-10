@@ -47,14 +47,15 @@
         @endforeach
       </div>
 
-      @if ($cardLastFour)
+      @if ($cardLastFour || $isPayPal)
         <div class="row">
           <div class="col-xs-12">
             <h3>Your Details</h3>
             <ul class="Subscription__PaymentMethodDetails">
               <li>
                 <span class="text-muted">Name:</span>
-                <span class="Subscription__PaymentMethodValue">{{ Auth::user()->name }}</span>
+                <span
+                    class="Subscription__PaymentMethodValue">{{ $firstName ? $firstName : Auth::user()->name }} {{ $lastName }}</span>
               </li>
               <li>
                 <span class="text-muted">Email:</span>
@@ -62,7 +63,11 @@
               </li>
               <li>
                 <span class="text-muted">Payment information:</span>
-                <span class="Subscription__PaymentMethodValue">{{ $cardType }} •••• •••• •••• {{ $cardLastFour }}</span>
+                @if ($isPayPal)
+                  <span class="Subscription__PaymentMethodValue">PayPal</span>
+                @else
+                  <span class="Subscription__PaymentMethodValue">{{ $cardType }} •••• •••• •••• {{ $cardLastFour }}</span>
+                @endif
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <a href="{{ secure_url('account/billing') }}">Edit Payment</a>
               </li>

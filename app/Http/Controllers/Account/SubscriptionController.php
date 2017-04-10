@@ -40,6 +40,11 @@ class SubscriptionController extends Controller
     $braintreePlans = collect($braintreePlans);
     $currentBraintreePlan = $user->subscriptions()->first();
 
+    $braintreeCustomer = \Braintree_Customer::find($user->braintree_id);
+    $paymentMethods = \collect($braintreeCustomer->paymentMethods);
+    $defaultPaymentMethod = $paymentMethods->where('default', true)->first();
+    $isPayPal = !isset($defaultPaymentMethod->last4);
+
     $clientToken = \Braintree_ClientToken::generate();
     if (!$currentBraintreePlan) {
       $currentBraintreePlan = $braintreePlans->where('price', '0.00')->first();
@@ -48,10 +53,13 @@ class SubscriptionController extends Controller
 
     return view('account/subscription', [
       'braintreeToken' => $clientToken,
-      'cardLastFour' => $user->card_last_four,
-      'cardType' => $user->card_type,
+      'cardLastFour' => $isPayPal ? null : $defaultPaymentMethod->last4,
+      'cardType' => $isPayPal ? null : $user->card_type,
       'currentBraintreePlan' => $currentBraintreePlan,
       'braintreePlans' => $braintreePlans,
+      'isPayPal' => $isPayPal,
+      'firstName' => $braintreeCustomer->firstName,
+      'lastName' => $braintreeCustomer->lastName,
     ]);
   }
 }

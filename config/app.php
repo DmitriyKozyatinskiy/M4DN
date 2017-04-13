@@ -51,7 +51,7 @@ return [
   |
   */
 
-  'url' => env('APP_URL', 'https://sneekr.herokuapp.com'),
+  'url' => env('APP_URL', 'https://dashboard.sneekr.net'),
 
   /*
   |--------------------------------------------------------------------------

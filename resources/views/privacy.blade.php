@@ -26,7 +26,7 @@
     <p>
       This Privacy Policy may be changed from time to time.
       The respective current version is available at:
-      <a href="https://sneekr.herokuapp.com/privacy">https://sneekr.herokuapp.com/privacy</a>.
+      <a href="http://sneekr.net/privacy-policy">http://sneekr.net/privacy-policy</a>.
     </p>
     <p>
       March 2017

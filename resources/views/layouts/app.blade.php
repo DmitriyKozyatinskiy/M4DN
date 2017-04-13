@@ -18,7 +18,6 @@
   </script>
 </head>
 <body>
-{{  dump(date('m/d/Y h:i:s a', time()))  }}
 <div id="app" class="container-fluid Wrapper">
   @include('layouts.header')
   <div class="col-xs-12 text-center InstallExtensionButtonContainer">

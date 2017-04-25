@@ -18,7 +18,7 @@ class SubscriptionController extends Controller
   {
     $savedPlan = Plan::where('braintree_id', $braintree_id)->first();
     dump($braintree_id);
-    dump($savedPlan);s
+    dump($savedPlan);
     if ($savedPlan) {
       $plan = $savedPlan;
       $hours = $plan->hours;

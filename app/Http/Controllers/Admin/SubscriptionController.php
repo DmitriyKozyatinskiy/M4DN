@@ -22,11 +22,11 @@ class SubscriptionController extends Controller
     if ($savedPlan) {
       $plan = $savedPlan;
       $hours = $plan->hours;
-      $braintree_id = $plan->braintree_id;
+      // $braintree_id = $plan->braintree_id;
     } else {
       $braintreePlans = \Braintree_Plan::all();
       $plan = collect($braintreePlans)->where('id', $braintree_id)->first();
-      $braintree_id = $plan->id;
+      // $braintree_id = $plan->id;
       $hours = null;
     }
 

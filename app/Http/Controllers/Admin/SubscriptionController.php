@@ -44,8 +44,8 @@ class SubscriptionController extends Controller
       $plan->devices = 999;
       $plan->save();
     } else {
-      $plan = new Plan();
-      $plan->braintree_id = $request->braintree_id;
+      // $plan = new Plan();
+      // $plan->braintree_id = $request->braintree_id;
       $plan = new Plan([
         'braintree_id' => $request->braintree_id,
         'hours' => $request->hours,

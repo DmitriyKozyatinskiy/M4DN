@@ -52,6 +52,8 @@ class SubscriptionController extends Controller
       $plan->save();
     }
 
+    dump($plan);
+
     //return $this->show($plan->id);
 
     return redirect()->route('subscription/show')->with('subscription-save-success', 'Subscription is saved!');

@@ -32,12 +32,12 @@ class RemoveUnneededPlanColumns extends Migration
     public function down()
     {
       Schema::table('plans', function (Blueprint $table) {
-        $table->integer('level')->nullable();
-        $table->string('name')->unique();
-        $table->string('description')->nullable();
-        $table->integer('price')->default(100);
-        $table->boolean('saveIncognito')->default(true);
-        $table->boolean('saveAllHistory')->default(true);
+        // $table->integer('level')->nullable();
+//        $table->string('name')->unique();
+//        $table->string('description')->nullable();
+//        $table->integer('price')->default(100);
+//        $table->boolean('saveIncognito')->default(true);
+//        $table->boolean('saveAllHistory')->default(true);
         $table->dropColumn('braintree_id');
       });
     }

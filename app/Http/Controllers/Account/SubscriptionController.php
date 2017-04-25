@@ -48,7 +48,9 @@ class SubscriptionController extends Controller
     $clientToken = \Braintree_ClientToken::generate();
     if (!$currentBraintreePlan) {
       $currentBraintreePlan = $braintreePlans->where('price', '0.00')->first();
-      $currentBraintreePlan->braintree_plan = $currentBraintreePlan->id;
+      if ($currentBraintreePlan) {
+        $currentBraintreePlan->braintree_plan = $currentBraintreePlan->id;
+      }
     }
 
     return view('account/subscription', [

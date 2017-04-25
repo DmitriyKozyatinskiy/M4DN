@@ -38,7 +38,7 @@ class RemoveUnneededPlanColumns extends Migration
 //        $table->integer('price')->default(100);
 //        $table->boolean('saveIncognito')->default(true);
 //        $table->boolean('saveAllHistory')->default(true);
-        $table->dropColumn('braintree_id');
+        //$table->dropColumn('braintree_id');
       });
     }
 }

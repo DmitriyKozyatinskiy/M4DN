@@ -17,6 +17,8 @@ class SubscriptionController extends Controller
   protected function show($braintree_id)
   {
     $savedPlan = Plan::where('braintree_id', $braintree_id)->first();
+    dump($braintree_id);
+    dump($savedPlan);s
     if ($savedPlan) {
       $plan = $savedPlan;
       $hours = $plan->hours;

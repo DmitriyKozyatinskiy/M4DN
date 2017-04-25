@@ -39,6 +39,7 @@ class SubscriptionController extends Controller
     });
     $braintreePlans = collect($braintreePlans);
     $currentBraintreePlan = $user->subscriptions()->first();
+    dump($currentBraintreePlan);
 
     $braintreeCustomer = \Braintree_Customer::find($user->braintree_id);
     $paymentMethods = \collect($braintreeCustomer->paymentMethods);
@@ -48,6 +49,7 @@ class SubscriptionController extends Controller
     $clientToken = \Braintree_ClientToken::generate();
     if (!$currentBraintreePlan) {
       $currentBraintreePlan = $braintreePlans->where('price', '0.00')->first();
+      dump($currentBraintreePlan);
       if ($currentBraintreePlan) {
         $currentBraintreePlan->braintree_plan = $currentBraintreePlan->id;
       }

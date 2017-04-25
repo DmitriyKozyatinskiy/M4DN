@@ -27,7 +27,7 @@ class ChangeSubscriptionColumnConstraints extends Migration
     public function down()
     {
       Schema::table('plans', function (Blueprint $table) {
-        $table->unique(['devices']);
+        // $table->unique(['devices']);
         $table->string('description')->nullable(true)->change();
       });
     }

@@ -17,8 +17,6 @@ class SubscriptionController extends Controller
   protected function show($braintree_id)
   {
     $savedPlan = Plan::where('braintree_id', $braintree_id)->first();
-    dump($braintree_id);
-    dump($savedPlan);
     if ($savedPlan) {
       $plan = $savedPlan;
       $hours = $plan->hours;
@@ -54,10 +52,8 @@ class SubscriptionController extends Controller
       $plan->save();
     }
 
-    dump($plan);
-
     //return $this->show($plan->id);
 
-    return true;//redirect()->route('subscription/show')->with('subscription-save-success', 'Subscription is saved!');
+    return redirect()->route('subscription/show')->with('subscription-save-success', 'Subscription is saved!');
   }
 }

@@ -100,7 +100,8 @@ class AuthenticateController extends Controller
     $validator = Validator::make($request->all(), [
       'name' => 'required|max:25|string',
       'email' => 'required|email|max:255|unique:users',
-      'password' => 'required|min:6|confirmed'
+      'password' => 'required|min:6|confirmed',
+      'subscribe' => 'required'
     ]);
 
     if ($validator->fails()) {
@@ -120,10 +121,10 @@ class AuthenticateController extends Controller
       'api_token' => str_random(60)
     ]);
 
-    $freePlan = Plan::where('price', 0)->first();
-    if ($freePlan) {
-      $user->plan()->associate($freePlan);
-    }
+//    $freePlan = Plan::where('price', 0)->first();
+//    if ($freePlan) {
+//      $user->plan()->associate($freePlan);
+//    }
 
     $user->confirmation_code = str_random(30);
     $user->save();

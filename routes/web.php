@@ -17,6 +17,16 @@ Route::get('/', 'Visits\VisitsController@show')
   ->middleware('login')
   ->name('home');
 
+Route::get('/admin', 'Admin\AdminController@show')
+  ->middleware('login')
+  ->name('admin');
+Route::post('/admin', 'Admin\AdminController@save')
+  ->middleware('login');
+Route::get('/admin/users', 'Admin\AdminController@users')
+  ->middleware('admin');
+Route::get('/admin/users/{id}', 'Admin\AdminController@user')
+  ->middleware('admin');
+
 Route::get('/account/settings', function () {
     return view('account/settings');
 })->middleware('login')
@@ -73,7 +83,7 @@ Route::get('/privacy', function () {
 });
 
 
-Route::get('/account/set_admin', 'Account\AccountController@setAdmin');
+// Route::get('/account/set_admin', 'Account\AccountController@setAdmin');
 Route::get('/account/test_subscription', 'Account\AccountController@setSubscription')
   ->middleware('login');
 

@@ -5,9 +5,9 @@
   {{--<a href="{{ secure_url('account/billing') }}" class="Sidebar__Item">Billing</a>--}}
   <a href="{{ secure_url('account/settings') }}" class="Sidebar__Item">Account Settings</a>
 
-  {{--@if (Auth::check() && Auth::user()->isAdmin)--}}
-  {{--<a href="#" class="Sidebar__Item">Admin Panel</a>--}}
-  {{--@endif--}}
+  @if (Auth::check() && Auth::user()->isAdmin)
+    <a href="{{ secure_url('admin/users') }}" class="Sidebar__Item">Admin Panel</a>
+  @endif
 
   <div class="Sidebar__AdPanel">
     <ins class="adsbygoogle"

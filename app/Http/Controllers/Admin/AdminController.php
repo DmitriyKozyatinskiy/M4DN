@@ -37,7 +37,6 @@ class AdminController extends Controller
   public function users(Request $request)
   {
     $keyword = $request->keyword;
-    dump($keyword);
 //    $users = User::all()
 //      ->when($keyword, function ($query) use ($keyword) {
 //        return $query->where(function ($query) use ($keyword) {
@@ -50,7 +49,7 @@ class AdminController extends Controller
       ->orWhere('email', 'like', '%' . $keyword . '%')
       ->orderBy('created_at', 'desc')
       ->get();
-    return view('admin/users', ['users' => $users]);
+    return view('admin/users', ['users' => $users, 'keyword' => $keyword]);
   }
 
   public function user($id)

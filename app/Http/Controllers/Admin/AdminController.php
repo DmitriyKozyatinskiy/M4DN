@@ -34,9 +34,22 @@ class AdminController extends Controller
     }
   }
 
-  public function users()
+  public function users(Request $request)
   {
-    $users = User::all()->sortByDesc('created_at');
+    $keyword = $request->keyword;
+    dump($keyword);
+//    $users = User::all()
+//      ->when($keyword, function ($query) use ($keyword) {
+//        return $query->where(function ($query) use ($keyword) {
+//          $query->where('name', 'like', '%' . $keyword . '%')
+//            ->orWhere('email', 'like', '%' . $keyword . '%');
+//        });
+//      })
+//      ->sortByDesc('created_at');
+    $users = User::where('name', 'like', '%' . $keyword . '%')
+      ->orWhere('email', 'like', '%' . $keyword . '%')
+      ->orderBy('created_at', 'desc')
+      ->get();
     return view('admin/users', ['users' => $users]);
   }
 

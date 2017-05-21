@@ -12,6 +12,18 @@
       </li>
     </ul>
     <br>
+
+    <div class="collapse in" id="js-history-form-container">
+      <form action="{{ secure_url('admin/users') }}" class="form-inline well" id="js-users-form">
+        <div class="form-group">
+          <input class="form-control" name="keyword" id="js-users-search" placeholder="Search">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" id="js-users-submit-button">Search</button>
+        </div>
+      </form>
+    </div>
+
     <table class="table table-condensed table-striped table-hover">
       <thead>
         <tr>

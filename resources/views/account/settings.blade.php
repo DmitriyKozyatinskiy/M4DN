@@ -30,22 +30,14 @@
                 </div>
               </div>
 
-              <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                <label for="password" class="col-md-4 control-label">Password</label>
+              <div class="form-group">
+                <label for="timezone-selector" class="col-md-4 control-label">Timezone</label>
                 <div class="col-md-6">
-                  <input id="password" type="password" class="form-control" name="password" required>
-                  @if ($errors->has('password'))
-                    <span class="help-block">
-                      <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                  @endif
-                </div>
-              </div>
-
-              <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                <label for="password_confirmation" class="col-md-4 control-label">Confirm password</label>
-                <div class="col-md-6">
-                  <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
+                  {!! Timezone::selectForm('US/Central', 'Select a timezone', [
+                    'class' => 'form-control',
+                    'id' => 'js-timezone-selector',
+                    'name' => 'timezone',
+                  ]) !!}
                 </div>
               </div>
 
@@ -57,9 +49,47 @@
                 </div>
               </div>
             </form>
+
+            <hr>
+
+            <h4>Change Password</h4>
+            <form class="form-horizontal" role="form" method="POST" action="{{ secure_url('/account/password') }}">
+              {{ csrf_field() }}
+              <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label for="password" class="col-md-4 control-label">Password</label>
+                <div class="col-md-6">
+                  <input id="password" type="password" class="form-control" name="password">
+                  @if ($errors->has('password'))
+                    <span class="help-block">
+                      <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                  @endif
+                </div>
+              </div>
+              <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                <label for="password_confirmation" class="col-md-4 control-label">Confirm password</label>
+                <div class="col-md-6">
+                  <input id="password_confirmation" type="password" class="form-control" name="password_confirmation">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                  <button type="submit" class="btn btn-primary">
+                    Change Password
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  @push('scripts')
+  <script>
+    window.timezone = '<?php echo $timezone ?>';
+  </script>
+  <script src="/js/account_settings.js"></script>
+  @endpush
 @endsection

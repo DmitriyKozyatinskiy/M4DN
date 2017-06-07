@@ -4,5 +4,6 @@
   "/css/app.css": "/css/app.css",
   "/js/history.js": "/js/history.js",
   "/js/subscription.js": "/js/subscription.js",
-  "/js/devices.js": "/js/devices.js"
+  "/js/devices.js": "/js/devices.js",
+  "/js/account_settings.js": "/js/account_settings.js"
 }

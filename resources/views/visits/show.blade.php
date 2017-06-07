@@ -137,6 +137,9 @@
   </div>
 
   @push('scripts')
+  <script>
+    window.timezone = '<?php echo $timezone ?>';
+  </script>
   <script src="/js/history.js"></script>
   @endpush
 @endsection

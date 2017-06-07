@@ -184,6 +184,7 @@ return [
     // Skovmand\Mailchimp\MailchimpServiceProvider::class,
     Spatie\Newsletter\NewsletterServiceProvider::class,
     Laravel\Cashier\CashierServiceProvider::class,
+    Camroncade\Timezone\TimezoneServiceProvider::class,
   ],
 
   /*

@@ -27,11 +27,12 @@ Route::get('/admin/users', 'Admin\AdminController@users')
 Route::get('/admin/users/{id}', 'Admin\AdminController@user')
   ->middleware('admin');
 
-Route::get('/account/settings', function () {
-    return view('account/settings');
-})->middleware('login')
+Route::get('/account/settings', 'Account\AccountController@show')
+  ->middleware('login')
   ->name('account/settings');
 Route::post('/account/settings', 'Account\AccountController@save')
+  ->middleware('login');
+Route::post('/account/password', 'Account\AccountController@changePassword')
   ->middleware('login');
 
 Route::get('/account/subscription', 'Account\SubscriptionController@show')

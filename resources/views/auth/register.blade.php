@@ -73,6 +73,17 @@
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <label for="timezone-selector" class="col-md-4 control-label">Timezone</label>
+                  <div class="col-md-6">
+                    {!! Timezone::selectForm('US/Central', 'Select a timezone', [
+                      'class' => 'form-control',
+                      'id' => 'timezone-selector',
+                      'name' => 'timezone',
+                    ]) !!}
+                  </div>
+                </div>
+
                 <div class="form-group hidden">
                   <div class="col-md-6 col-md-offset-4">
                     <div class="checkbox">

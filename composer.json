@@ -8,6 +8,7 @@
         "php": ">=5.6.4",
         "barryvdh/laravel-cors": "^0.8.6",
         "bestmomo/laravel-email-confirmation": "^1.0",
+        "camroncade/timezone": "^0.1.0",
         "doctrine/dbal": "^2.5",
         "illuminate/html": "5.*",
         "laravel/cashier-braintree": "^2.0",

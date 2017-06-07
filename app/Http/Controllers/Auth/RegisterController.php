@@ -53,6 +53,7 @@ class RegisterController extends Controller
       'name' => 'required|max:25|string',
       'email' => 'required|email|max:255|unique:users',
       'password' => 'required|min:6|confirmed',
+      'timezone' => 'required|timezone',
     ]);
   }
 
@@ -68,6 +69,7 @@ class RegisterController extends Controller
       'name' => $data['name'],
       'email' => $data['email'],
       'password' => bcrypt($data['password']),
+      'timezone' => $data['timezone'],
       'is_subscription_required' => $data['subscribe'],
       'api_token' => str_random(60),
     ]);

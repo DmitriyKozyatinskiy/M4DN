@@ -45,7 +45,10 @@ function convertData(data) {
 
   dataArray.forEach(item => {
     item.visits.map(visit => {
-      return visit.shortDate = moment(visit.created_at, 'YYYY-MM-DD HH:mm:ss').format('LT')
+      visit.shortDate = moment(visit.created_at, 'YYYY-MM-DD HH:mm:ss').tz(window.timezone).format('LT');
+      visit.created_at = moment(visit.created_at, 'YYYY-MM-DD HH:mm:ss').tz(window.timezone).format('YYYY-MM-DD HH:mm:ss');
+
+      return visit.shortDate;
     });
   });
   // dataArray = dataArray.map(item => {

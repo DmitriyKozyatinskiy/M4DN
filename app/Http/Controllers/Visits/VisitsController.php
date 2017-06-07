@@ -21,8 +21,9 @@ class VisitsController extends Controller
   {
     $user = Auth::user();
     $devices = $user->devices;
+    $timezone = $user->timezone;
 
-    return view('visits/show', ['devices' => $devices]);
+    return view('visits/show', ['devices' => $devices, 'timezone' => $timezone]);
   }
 
   public function delete(Request $request)
@@ -64,7 +65,13 @@ class VisitsController extends Controller
 
     $device = $request->device_id;
     $startDate = $request->start_date;
+    if ($startDate) {
+      $startDate = Carbon::createFromFormat('Y-m-d H:i:s', $request->start_date, 'UTC');
+    }
     $endDate = $request->end_date;
+    if ($endDate) {
+      $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $request->end_date, 'UTC');
+    }
     $keyword = $request->keyword;
 
     if ($user->subscribed('main')) {
@@ -114,8 +121,9 @@ class VisitsController extends Controller
         ->offset($request->offset)
         ->limit(20)
         ->with('device')
-        ->get()->groupBy(function ($visit) {
-          return Carbon::parse($visit->created_at)->format('Y-m-d');
+        ->get()->groupBy(function ($visit) use ($user) {
+          $date = Carbon::createFromFormat('Y-m-d H:i:s', $visit->created_at, $user->timezone);
+          return Carbon::parse($date)->format('Y-m-d');
         });
 
 

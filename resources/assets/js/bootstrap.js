@@ -9,6 +9,8 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 window.Mustache = require('mustache');
 window.moment = require('moment');
+require('moment-timezone');
+window.moment.tz.setDefault('UTC');
 
 require('whatwg-fetch');
 require('bootstrap-sass');

@@ -17,5 +17,6 @@ mix.js(['resources/assets/js/app.js'], 'public/js/app.js')
   .js(['resources/assets/js/subscription.js'], 'public/js/subscription.js')
   .js(['resources/assets/js/billing.js', 'resources/assets/js/billing_paypal.js'], 'public/js/billing.js')
   .js(['resources/assets/js/devices.js'], 'public/js/devices.js')
+  .js(['resources/assets/js/account_settings.js'], 'public/js/account_settings.js')
   .js(['resources/assets/js/History/History.js'], 'public/js/history.js')
   .sass('resources/assets/sass/app.scss', 'public/css');
